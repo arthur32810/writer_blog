@@ -26,4 +26,16 @@ class PostManager extends Manager
 
 		return $posts;
 	}
+
+	public function getPost($id){
+		$db = Manager::dbConnect();
+
+		$req = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') 
+								AS creation_date_fr FROM posts WHERE id = ?');
+		$req->execute(array($id));
+
+		$post = $req->fetch();
+
+		return $post;
+	}
 }

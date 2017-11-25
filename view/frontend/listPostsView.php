@@ -27,11 +27,10 @@
 		$posts->closeCursor();	?>
 
 		<div style="text-align: center;"> <?php
-			$nb = $nb_paging; 
-			
-			for ($i=1; $i<= $nb; $i++) { ?>
 
-					<a href="index.php?action=listPosts&page=<?= $i ?>"> <?= $i ?> </a> 
+			for ($i=1; $i<= $nb_paging_posts; $i++) { ?>
+
+					<a href="index.php?action=listPosts&post_page=<?= $i ?>"> <?= $i ?> </a> 
 
 			<?php }	?>
 		</div>
