@@ -7,7 +7,7 @@
 			listPosts();
 		}
 
-		if ($_GET['action'] == 'post'){
+		elseif ($_GET['action'] == 'post'){
 			if (isset($_GET['id']) && $_GET['id'] > 0) {
 				post();
 			}
@@ -16,8 +16,12 @@
 			}
 		}
 
-		if ($_GET['action'] == 'write_post'){
+		elseif ($_GET['action'] == 'write_post'){
 			writePosts();
+		}
+
+		elseif ($_GET['action'] == 'create_post'){
+			createPost();
 		}
 	}
 
