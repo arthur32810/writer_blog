@@ -22,3 +22,10 @@ function listPosts()
 
     require('view/frontend/listPostsView.php');
 }
+
+function post()
+{
+    $postManager = new Arthur\WriterBlog\Model\PostManager();
+
+    $post = $postManager->getPost();
+}
