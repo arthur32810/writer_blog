@@ -58,5 +58,5 @@ function post()
 
 function writePost()
 {
-
+    require('view/backend/writePost.php');
 }
