@@ -18,7 +18,12 @@
 		}
 
 		elseif ($_GET['action'] == 'write_post'){
-			writePost();
+				if (!isset($_SESSION['pseudo']))
+				{ 
+					header('Location: index.php?action=connexion');
+			  		exit();
+			  	}
+				else { writePost(); }
 		}
 
 		elseif ($_GET['action'] == 'create_post'){
