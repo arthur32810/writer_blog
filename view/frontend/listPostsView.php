@@ -24,8 +24,17 @@
 			
 		<?php }
 		
-		$posts->closeCursor();		
-	?>
+		$posts->closeCursor();	?>
+
+		<div style="text-align: center;"> <?php
+			$nb = $nb_paging; 
+			
+			for ($i=1; $i<= $nb; $i++) { ?>
+
+					<a href="index.php?action=listPosts&page=<?= $i ?>"> <?= $i ?> </a> 
+
+			<?php }	?>
+		</div>
 
 <?php $content = ob_get_clean(); ?>
 
