@@ -15,19 +15,8 @@ function listPosts($page)
         $limit2 = 5;
     }
 
-    $posts = $postManager->getPosts($limit1, $limit2);
+    $posts = $postManager->getPosts($limit1, $limi);
     $nb_paging = $postManager->pagingPosts();
 
     require('view/frontend/listPostsView.php');
 }
-
-/*function listPostsPaging($page)
-{
-    $postManager = new Arthur\WriterBlog\Model\PostManager();
-    
-    
-
-    $posts = $postManager->getPosts($limit1, $limit2);
-
-    require('view/frontend/listPostsView.php');
-}*/
