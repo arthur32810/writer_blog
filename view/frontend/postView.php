@@ -1,4 +1,4 @@
-<?php $title = 'Mon Livre !'; ?>
+<?php $title = "Chapitre ".$post['id']." : ".$post['title']; ?>
 
 <?php ob_start(); ?>
 
