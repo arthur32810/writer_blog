@@ -20,3 +20,22 @@ function createPost(){
         header('Location: index.php?action=write_post&create=yes');
     }
 }
+
+function connexion(){
+	$userManager = new Arthur\WriterBlog\Model\UserManager();
+
+	$pseudo= htmlspecialchars(strip_tags($_GET['pseudo'])); 					 // Recuperation valeur 'pseudo' du formulaire dans variable 'pseudo'
+	$pass= sha1(htmlspecialchars(strip_tags($_GET['pass'])));
+
+	$connexion = $userManager->createPost($pseudo, $pass);
+
+	if(!$connexion)){
+		echo "L'identifiant n'existe pas !";
+	}
+	else{
+		$_SESSION['pseudo'] = $pseudo;
+		$_SESSION['pass'] = $pass;
+
+		session_start();
+	}
+}
