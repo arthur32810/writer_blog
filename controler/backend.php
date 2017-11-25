@@ -42,3 +42,7 @@ function connection(){
 		echo "C'est connecté";
 	}
 }
+
+function testConnection(){
+	
+}
