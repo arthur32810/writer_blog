@@ -60,3 +60,7 @@ function writePost()
 {
     require('view/backend/writePost.php');
 }
+
+function createPost(){
+    
+}
