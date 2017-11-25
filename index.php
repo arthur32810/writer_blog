@@ -15,6 +15,10 @@
 				echo 'Erreur : aucun identifiant de billet envoyé';
 			}
 		}
+
+		if ($_GET['action'] == 'create_post'){
+			createpost();
+		}
 	}
 
 	else { listPosts(); }
