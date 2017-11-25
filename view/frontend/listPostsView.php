@@ -1,9 +1,12 @@
 <?php $title = 'Mon Blog !'; ?>
 
 <?php ob_start(); ?>
-<a href="index.php?action=write_post"> Ecriture </a>
 
-<div> <?php require('view/frontend/userConnexion.php'); ?> </div>
+<a href="index.php?action=write_post"> Ecriture </a> <br/>
+
+<a href="index.php?action=deconnection"> Deconnection </a> <br/>
+<a href="index.php?action=connect"> Connection </a>
+
 
 		<h1> Mon super blog ! </h1>
 		<h2> Derniers billets du blog : </h2>

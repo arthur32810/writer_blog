@@ -2,7 +2,7 @@
 	$script = ' <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=vhnlap27hf8ot2ip6dmzfw56ndq9anxv230bkh8i9oxmua2q"></script>
   		<script>tinymce.init({ selector:\'textarea\' });</script>'?>
 
-<?php ob_start(); 
+<?php ob_start();
 		
 		if (!empty($_GET['create'])){
 			if ($_GET['create'] == 'yes'){

@@ -22,4 +22,10 @@ class UserManager extends Manager
 		setcookie('pseudo', $_SESSION['pseudo'], time() + 30*24*3600, null, null, false, true);
 		setcookie('pass', $_SESSION['pass'], time() + 30*24*3600, null, null, false, true); 
 	}
+
+	public function deconnection(){
+		// Suppression des variables de session et de la session
+		$_SESSION = array();
+		session_destroy();
+	}
 }
