@@ -38,4 +38,8 @@ class PostManager extends Manager
 
 		return $post;
 	}
+
+	public function createPost(){
+		
+	}
 }
