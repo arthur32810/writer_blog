@@ -17,11 +17,15 @@
 		}
 
 		elseif ($_GET['action'] == 'write_post'){
-			writePosts();
+			writePost();
 		}
 
 		elseif ($_GET['action'] == 'create_post'){
-			createPost();
+			if(!empty($_POST['title']) && !empty($_POST['content']))
+			{
+				createPost();
+			}
+			else{header('Location: index.php?action=write_post&complete=no');}
 		}
 	}
 

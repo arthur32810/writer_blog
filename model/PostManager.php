@@ -39,7 +39,13 @@ class PostManager extends Manager
 		return $post;
 	}
 
-	public function createPost(){
-		
+	public function createPost($title, $content){
+		$db = Manager::dbConnect();
+
+		$addPost = $db->prepare('INSERT INTO posts (title, content, creation_date) VALUES (:title, :content, NOW())');
+		$addPost->execute(array(
+						'title' => $title,
+						'content' => $content));
+		return $addPost;
 	}
 }
