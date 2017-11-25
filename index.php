@@ -1,5 +1,6 @@
 <?php								
-	require('controler/frontend.php');
+	require_once('controler/frontend.php');
+	require_once('controler/backend.php');
 	
 	if (isset($_GET['action'])) {
 
@@ -26,6 +27,14 @@
 				createPost();
 			}
 			else{header('Location: index.php?action=write_post&complete=no');}
+		}
+
+		elseif($_GET['action'] == 'connexion')
+		{
+			if(!empty($_POST['pseudo']) && !empty(['pass'])){
+				connection();
+			}
+			else{ echo "pseudo ou mot de passe non présent"}
 		}
 	}
 
