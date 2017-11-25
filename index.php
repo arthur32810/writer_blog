@@ -17,7 +17,7 @@
 		}
 
 		if ($_GET['action'] == 'create_post'){
-			createpost();
+			createPosts();
 		}
 	}
 
