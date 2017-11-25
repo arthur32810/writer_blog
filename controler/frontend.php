@@ -56,7 +56,7 @@ function post()
     require('view/frontend/postView.php');
 }
 
-function createPost()
+function writePost()
 {
-    
+
 }
