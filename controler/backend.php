@@ -2,6 +2,7 @@
 
 require_once('model/PostManager.php');
 require_once('model/CommentManager.php');
+require_once('model/UserManager.php');
 
 function writePost()
 {
@@ -21,15 +22,15 @@ function createPost(){
     }
 }
 
-function connexion(){
+function connection(){
 	$userManager = new Arthur\WriterBlog\Model\UserManager();
 
-	$pseudo= htmlspecialchars(strip_tags($_GET['pseudo'])); 					 // Recuperation valeur 'pseudo' du formulaire dans variable 'pseudo'
-	$pass= sha1(htmlspecialchars(strip_tags($_GET['pass'])));
+	$pseudo= htmlspecialchars(strip_tags($_POST['pseudo'])); 					 // Recuperation valeur 'pseudo' du formulaire dans variable 'pseudo'
+	$pass= sha1(htmlspecialchars(strip_tags($_POST['pass'])));
 
-	$connexion = $userManager->createPost($pseudo, $pass);
+	$connexion = $userManager->connection($pseudo, $pass);
 
-	if(!$connexion)){
+	if(!$connexion){
 		echo "L'identifiant n'existe pas !";
 	}
 	else{
@@ -37,5 +38,7 @@ function connexion(){
 		$_SESSION['pass'] = $pass;
 
 		session_start();
+
+		echo "C'est connecté";
 	}
 }

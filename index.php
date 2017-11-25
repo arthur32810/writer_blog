@@ -34,7 +34,7 @@
 			if(!empty($_POST['pseudo']) && !empty(['pass'])){
 				connection();
 			}
-			else{ echo "pseudo ou mot de passe non présent"}
+			else{ echo "pseudo ou mot de passe non présent";}
 		}
 	}
 

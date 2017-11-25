@@ -1,5 +1,3 @@
-<?php $title ='Connexion'?>
-
 <?php ob_start(); ?>
 
 	<form action="index.php?action=connexion" method="post">
