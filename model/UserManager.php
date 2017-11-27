@@ -5,6 +5,29 @@ require_once('model/Manager.php');
 
 class UserManager extends Manager
 {
+	public function getUser($pseudo){
+		$db = Manager::dbConnect();
+
+		$recuperation_user = $db->prepare('SELECT * FROM users WHERE pseudo = ?');
+		$recuperation_user->execute(array($pseudo));
+
+		$donnees = $recuperation_user->fetch();
+
+		return $donnees;
+	}
+
+	public function addUser($pseudo, $pass){
+		$db = Manager::dbConnect();
+
+		$role = 'user';
+
+		$addUser = $db->prepare('INSERT INTO users(pseudo, password, role) VALUES (:pseudo, :pass, :role)');
+		$addUser->execute(array('pseudo' => $pseudo,
+								'pass' => $pass,
+								'role' => $role));
+
+		return $addUser;
+	}
 	public function connection($pseudo, $pass){
 		$db = Manager::dbConnect();
 
@@ -27,5 +50,9 @@ class UserManager extends Manager
 		// Suppression des variables de session et de la session
 		$_SESSION = array();
 		session_destroy();
+
+		// Suppression des cookies de connexion automatique
+		setcookie('login', '');
+		setcookie('pass_hache', '');
 	}
 }

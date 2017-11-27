@@ -4,6 +4,34 @@ require_once('model/PostManager.php');
 require_once('model/CommentManager.php');
 require_once('model/UserManager.php');
 
+function inscription(){
+	require('view/frontend/userInscription.php');
+}
+
+function addUser(){
+	$userManager = new Arthur\WriterBlog\Model\UserManager();
+
+	$user = $userManager->getUser($_POST['pseudo']);
+
+	if(!empty($user)){
+		header('Location: index.php?action=inscription&user=exist');
+	}
+	else{ 
+
+		$pseudo= htmlspecialchars(strip_tags($_POST['pseudo'])); 			
+		$pass= sha1(htmlspecialchars(strip_tags($_POST['pass'])));
+
+		$addUser = $userManager->addUser($pseudo, $pass);
+
+		if ($updatePost === false) {
+			    header('Location: index.php?action=inscription&add=no');
+			}
+			else {
+			    header('Location: index.php?action=listPosts&add=yes');
+			}
+	}
+}
+
 function connect(){
 	session_start();
 
@@ -23,7 +51,7 @@ function connection(){
 
 	
 
-	$pseudo= htmlspecialchars(strip_tags($_POST['pseudo'])); 					 // Recuperation valeur 'pseudo' du formulaire dans variable 'pseudo'
+	$pseudo= htmlspecialchars(strip_tags($_POST['pseudo'])); 
 	$pass= htmlspecialchars(strip_tags($_POST['pass']));
 	$pass_hache = sha1($pass);
 

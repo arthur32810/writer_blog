@@ -5,7 +5,7 @@
 		if (!empty($_GET['create']) && $_GET['create'] == 'yes'){
 				echo "Le Chapitre à été ajouté";
 			}
-			
+
 		elseif (!empty($_GET['update'])){
 			if ($_GET['update'] == 'yes'){
 				echo "Le Chapitre à été modifié";
@@ -22,9 +22,14 @@
 				echo "Le chapitre n'a pas pu être supprimé";
 			}
 		}
+
+		elseif (!empty($_GET['add']) && $_GET['add'] == 'yes'){
+			echo "Vous avez bien été inscrit(e)";
+		}
 	 ?>
 <div>	
 	<a href="index.php?action=write_post"> Ecriture </a> <br/>	
+	<a href="index.php?action=inscription"> Inscription au site </a> <br/>
 	<a href="index.php?action=deconnection"> Deconnection </a> <br/>
 	<a href="index.php?action=connect"> Connection </a>
 </div>
@@ -48,7 +53,7 @@
                     <em><a href="index.php?action=post&&id=<?= $data['id']?>"> Lire le chapitre</a></em>
                 </p>
                <?php 
-               if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'author'){?> 
+               if(!empty($_SESSION['role']) && $_SESSION['role'] == 'admin' || !empty($_SESSION['role']) && $_SESSION['role'] == 'author'){ ?> 
            			<a href="index.php?action=update_post&postId=<?= $data['id']?>"> Modification </a> <?php 
            		}?>
             </section>

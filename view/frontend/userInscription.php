@@ -1,9 +1,20 @@
-<?php $title="Création d'un compte utilisateur" ?>
-<?php ob_start(); ?>
+<?php $title="Création d'un compte utilisateur"; ?>
+<?php ob_start(); 
+
+	if (!empty($_GET['complete']) && $_GET['complete'] == 'no'){
+				echo "Les informations ne sont pas complétes";
+			} 
+	elseif (!empty($_GET['user']) && $_GET['user'] == 'exist'){
+			echo "Pseudo déjà utilisé";
+		}
+	elseif (!empty($_GET['add']) && $_GET['add'] == 'no'){
+			echo "Vous n'avez pu été inscrit(e), veuillez réessayer";
+		}
+?>
 
 <h1> Création d'un compte utilisateur </h1>
 
-	<form action="index.php?action=connection" method="post">
+	<form action="index.php?action=addUser" method="post">
 		<div>
 			<label for="pseudo">Pseudo</label>
 			<input type="text" id="pseudo" name="pseudo"/>

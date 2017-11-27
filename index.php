@@ -69,6 +69,16 @@
 			else { echo "Vous n'avez pas le droit de voir cette page"; }
 		}
 
+		elseif($_GET['action'] == 'inscription')
+		{
+			inscription();
+		}
+
+		elseif($_GET['action'] == 'addUser'){
+			if(!empty($_POST['pseudo']) &&!empty($_POST['pass']) ){ addUser(); }
+			else{ header('Location: index.php?action=inscription&complete=no'); }
+		}
+
 		elseif($_GET['action'] == 'connect'){
 			connect();
 		}
