@@ -18,7 +18,8 @@
 			}
 		}
 		} ?>
-<div>		
+<div>	
+	<a href="index.php?action=write_post"> Ecriture </a> <br/>	
 	<a href="index.php?action=deconnection"> Deconnection </a> <br/>
 	<a href="index.php?action=connect"> Connection </a>
 </div>
