@@ -53,4 +53,18 @@ function updatePost(){
 function deletePost(){
 	$postManager = new Arthur\WriterBlog\Model\PostManager();
 
+	$existpost = $postManager->getPost($_GET['id']);
+
+	if(!empty($existpost)){ 
+		$deletePost = $postManager->deletePost($_GET['id']);
+
+		if ($updatePost === false) {
+		    header('Location: index.php?action=write_post&update=no');
+		}
+		else {
+		    header('Location: index.php?action=write_post&update=yes');
+		}
+	}
+	else{echo "L'id n'existe pas ! ";}
+
 }
