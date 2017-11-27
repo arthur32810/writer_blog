@@ -31,9 +31,19 @@ function updateWrite(){
 }
 
 function updatePost(){
+	$postManager = new Arthur\WriterBlog\Model\PostManager();
 
+	$updatePost = $postManager->updatePost($_GET['id'], $_POST['chapter'], $_POST['title'], $_POST['content']);
+
+	if ($updatePost === false) {
+        header('Location: index.php?action=write_post&update=no');
+    }
+    else {
+        header('Location: index.php?action=write_post&update=yes');
+    }
 }
 
 function deletePost(){
-	
+	$postManager = new Arthur\WriterBlog\Model\PostManager();
+
 }
