@@ -60,11 +60,11 @@ function deletePost(){
 	if(!empty($existpost)){ 
 		$deletePost = $postManager->deletePost($_GET['id']);
 
-		if ($updatePost === false) {
-		    header('Location: index.php?action=write_post&update=no');
+		if ($deletePost === false) {
+		    header('Location: index.php?action=listPosts&delete=no');
 		}
 		else {
-		    header('Location: index.php?action=write_post&update=yes');
+		    header('Location: index.php?action=listPosts&delete=yes');
 		}
 	}
 	else{echo "L'id n'existe pas ! ";}
