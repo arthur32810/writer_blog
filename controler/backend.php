@@ -21,3 +21,9 @@ function createPost(){
         header('Location: index.php?action=write_post&create=yes');
     }
 }
+
+function updatePost(){
+	$postManager = new Arthur\WriterBlog\Model\PostManager();
+
+	$updatePost = $postManager->getPost();
+}

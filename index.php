@@ -27,9 +27,10 @@
 					header('Location: index.php?action=connect');
 					exit();
 				}
-				elseif($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'author'){
-						 writePost();}
+				elseif($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'author'){ writePost();}
 				else { echo "Vous n'avez pas le droit de voir cette page";}
+
+				
 		}
 
 		elseif ($_GET['action'] == 'create_post'){
@@ -38,6 +39,19 @@
 				createPost();
 			}
 			else{header('Location: index.php?action=write_post&complete=no');}
+		}
+
+		elseif ($_GET['action'] == 'update_post'){
+			session_start();
+
+			if (!isset($_SESSION['pseudo']))
+			{
+				//On n'est pas connecté
+				header('Location: index.php?action=connect');
+				exit();
+			}
+			elseif($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'author'){ updatePost();}
+			else { echo "Vous n'avez pas le droit de voir cette page";}
 		}
 
 		elseif($_GET['action'] == 'connect'){
