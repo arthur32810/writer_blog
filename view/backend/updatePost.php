@@ -40,8 +40,8 @@
 		</div> <br/>
 
 		<div>
-			<input type="submit" value="Modifier" name="update"/>
-			<input type="submit" value="Supprimer" name="delete"/>
+			<input type="submit" value="Modifier" name="update" onclick="return confirm('Êtes-vous sûr de vouloir modifer ce chapitre ?')"/>
+			<input type="submit" value="Supprimer" name="delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce chapitre ?')"/>
 			
 		</div>
 	</form>
