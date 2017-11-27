@@ -40,7 +40,9 @@
 		</div> <br/>
 
 		<div>
-			<input type="submit" value="Modifier"/>
+			<input type="submit" value="Modifier" name="update"/>
+			<input type="submit" value="Supprimer" name="delete"/>
+			
 		</div>
 	</form>
 
