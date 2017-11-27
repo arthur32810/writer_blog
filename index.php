@@ -55,11 +55,10 @@
 			elseif($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'author'){
 
 					if(!empty($_POST['update'])){
-
-						echo "Modifier";
+						updatePost();
 					}
 					elseif(!empty($_POST['delete'])){
-						echo "Supprimer";
+						deletePost();
 					}
 					else{
 						updateWrite();
