@@ -51,7 +51,9 @@
 				header('Location: index.php?action=connect');
 				exit();
 			}
-			elseif($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'author'){ updatePost();}
+			elseif($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'author'){
+
+				updatePost();}
 			else { echo "Vous n'avez pas le droit de voir cette page";}
 		}
 
