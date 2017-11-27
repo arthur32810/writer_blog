@@ -23,7 +23,7 @@
 	
 	<h1> Modification du chapitre <?= $post['chapter'] ?> : <?= $post['title']?>  </h1>
 
-	<form action="index.php?action=update_post" method="post">
+	<form action="index.php?action=update_post&id=<?= $post['id']?>" method="post">
 		<div>
 			<label for="title">Titre</label>
 			<input type="text" id="title" name="title" value="<?= $post['title']?>" /> <br/>
