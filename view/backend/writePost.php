@@ -28,6 +28,12 @@
 			<label for="title">Titre</label><br />
 			<input type="text" id="title" name="title" />
 		</div> <br/>
+
+		<div>
+			<label for="chapter">Chapitre n°</label>
+			<input type="number" id="chapter" name="chapter"/>
+		</div> <br/>
+
 		<div>
 			<label for="content">Texte</label><br />
 			<textarea id="content" name="content"></textarea>
