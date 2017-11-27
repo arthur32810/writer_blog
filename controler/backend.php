@@ -33,14 +33,21 @@ function updateWrite(){
 function updatePost(){
 	$postManager = new Arthur\WriterBlog\Model\PostManager();
 
-	$updatePost = $postManager->updatePost($_GET['id'], $_POST['chapter'], $_POST['title'], $_POST['content']);
+	$existpost = $postManager->getPost($_GET['id']);
 
-	if ($updatePost === false) {
-        header('Location: index.php?action=write_post&update=no');
-    }
-    else {
-        header('Location: index.php?action=write_post&update=yes');
-    }
+	if(!empty($existpost)){ 
+		$updatePost = $postManager->updatePost($_GET['id'], $_POST['chapter'], $_POST['title'], $_POST['content']);
+
+		if ($updatePost === false) {
+		    header('Location: index.php?action=write_post&update=no');
+		}
+		else {
+		    header('Location: index.php?action=write_post&update=yes');
+		}
+	}
+	else{echo "L'id n'existe pas ! ";}
+
+
 }
 
 function deletePost(){
