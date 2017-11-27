@@ -29,3 +29,11 @@ function updateWrite(){
 
 	require('view/backend/updatePost.php');
 }
+
+function updatePost(){
+
+}
+
+function deletePost(){
+	
+}
