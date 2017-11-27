@@ -9,6 +9,14 @@
 			elseif($_GET['create'] == 'no'){
 				echo "Le chapitre n'a pas pu être modifié";
 			}
+		elseif(!empty($_GET['delete'])){
+			if($_GET['delete'] == 'yes'){
+				echo "Le Chapitre à été supprimé";
+			}
+			elseif($_GET['delete'] == 'no'){
+				echo "Le chapitre n'a pas pu être supprimé";
+			}
+		}
 		} ?>
 <div>		
 	<a href="index.php?action=deconnection"> Deconnection </a> <br/>
