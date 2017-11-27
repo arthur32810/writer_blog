@@ -14,14 +14,20 @@ function createPost(){
 
     $post = $postManager->getPost('',$_POST['chapter']);
 
-    $createPost = $postManager->createPost($_POST['chapter'], $_POST['title'], $_POST['content']);
+    if(!empty($post)){
+    	echo "Le chapitre existe déjà";
+    }
+    else{
 
-     if ($createPost === false) {
-        header('Location: index.php?action=write_post&create=no');
-    }
-    else {
-        header('Location: index.php?action=write_post&create=yes');
-    }
+	    $createPost = $postManager->createPost($_POST['chapter'], $_POST['title'], $_POST['content']);
+
+	     if ($createPost === false) {
+	        header('Location: index.php?action=write_post&create=no');
+	    }
+	    else {
+	        header('Location: index.php?action=write_post&create=yes');
+	    }
+	}
 }
 
 function updateWrite(){
