@@ -21,7 +21,7 @@
 		
 		
 	
-	<h1> Modification du chapitre:  </h1>
+	<h1> Modification du chapitre <?= $post['chapter'] ?> : <?= $post['title']?>  </h1>
 
 	<form action="index.php?action=create_post" method="post">
 		<div>

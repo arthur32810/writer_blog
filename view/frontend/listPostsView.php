@@ -2,8 +2,6 @@
 
 <?php ob_start(); ?>
 
-<a href="index.php?action=update_post"> Modification </a> <br/>
-
 <a href="index.php?action=deconnection"> Deconnection </a> <br/>
 <a href="index.php?action=connect"> Connection </a>
 

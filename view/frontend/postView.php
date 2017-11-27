@@ -1,8 +1,8 @@
-<?php $title = "Chapitre ".$post['id']." : ".$post['title']; ?>
+<?php $title = "Chapitre ".$post['chapter']." : ".$post['title']; ?>
 
 <?php ob_start(); ?>
 
-	<h1> Chapitre <?= $post['id'] ?> :   <?= $post['title'] ?> </h1>
+	<h1> Chapitre <?= $post['chapter'] ?> :   <?= $post['title'] ?> </h1>
 
 	<a href="index.php?action=listPosts"> Revenir à l'index </a>
 
