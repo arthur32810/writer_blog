@@ -51,9 +51,21 @@
 				header('Location: index.php?action=connect');
 				exit();
 			}
+
 			elseif($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'author'){
 
-				updatePost();}
+					if(!empty($_POST['update'])){
+						 
+						echo "Modifier";
+					}
+					elseif(!empty($_POST['delete'])){
+						echo "Supprimer";
+					}
+					else{
+						updatePost();
+					}
+			}
+
 			else { echo "Vous n'avez pas le droit de voir cette page";}
 		}
 
