@@ -20,26 +20,23 @@
 			}
 		else{}
 			?>
-		
-		
-		
 	
 	<h1> Ecriture d'un chapitre </h1>
 
 	<form action="index.php?action=create_post" method="post">
 		<div>
 			<label for="title">Titre</label><br />
-			<input type="text" id="title" name="title" />
+			<input type="text" id="title" name="title" value="<?= $title ?>" />
 		</div> <br/>
 
 		<div>
 			<label for="chapter">Chapitre n°</label>
-			<input type="number" id="chapter" name="chapter"/>
+			<input type="number" id="chapter" name="chapter" value="<?= $chapter ?>"/>
 		</div> <br/>
 
 		<div>
 			<label for="content">Texte</label><br />
-			<textarea id="content" name="content"></textarea>
+			<textarea id="content" name="content"> <?= $content ?> </textarea>
 		</div> <br/>
 		<div>
 			<input type="submit" />

@@ -35,7 +35,7 @@
 		}
 
 		elseif ($_GET['action'] == 'create_post'){
-			if(!empty($_POST['title']) && !empty($_POST['content']))
+			if(!empty($_POST['chapter']) && !empty($_POST['title']) && !empty($_POST['content']))
 			{
 				createPost();
 			}
