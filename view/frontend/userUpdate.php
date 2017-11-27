@@ -16,15 +16,16 @@
 			<form action="index.php?action=updateUser&require_admin=ok" method="post">
 				<div>
 					<label for="pseudo">Pseudo</label>
-					<input type="text" id="pseudo" name="pseudo" required />
+					<input type="text" id="pseudo" name="pseudoSearch" required />
 				</div> <br>
 				<div>
 					<input type="submit" value="Modifier mon compte utilisateur" />
 				</div>
 			</form> <br>
 		<?php }
-?>
 
+	if(isset($_GET['require_admin']) || $_SESSION['role']!='admin'){
+?>
 	<form action="index.php?action=updateUser&require=ok" method="post">
 		<div>
 			<label for="pseudo">Pseudo</label>
@@ -45,11 +46,23 @@
 			<label for="confirmNewPass">Confirmer le nouveau mot de passe :</label>
 			<input type="text" id="confirmNewPass" name="confirmNewPass" />
 		</div>
+<?php
+		if($_SESSION['role'] == 'admin'){ ?>
+			<div>
+				<label for="role">Role de l'utilisateur : </label>
+			       <select name="role" id="role">
+			           <option value="admin">Administrateur</option>
+			           <option value="author">Auteur</option>
+			           <option value="view">Lecteur</option>
+			       </select>
+			</div>
+	<?php } ?>
 
 		<div>
 			<input type="submit" value="Modifier mon compte utilisateur" />
 		</div>
 	</form>
+<?php } ?>
 
 <?php $content = ob_get_clean(); ?>
 

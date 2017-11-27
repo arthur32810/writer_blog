@@ -26,7 +26,7 @@
 		elseif (!empty($_GET['add']) && $_GET['add'] == 'yes'){
 			echo "Vous avez bien été inscrit(e)";
 		}
-		elseif (!empty($_GET['add']) && $_GET['updateUser'] == 'yes'){
+		elseif (!empty($_GET['updateUser']) && $_GET['updateUser'] == 'yes'){
 			echo "Votre profil a bien été mis à jour";
 		}
 		elseif (!empty($_GET['connected']) && $_GET['connected'] == 'no'){
