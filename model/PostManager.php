@@ -48,4 +48,17 @@ class PostManager extends Manager
 						'content' => $content));
 		return $addPost;
 	}
+
+	public function createPost($id, $chapter, $title, $content){
+		$db = Manager::dbConnect();
+
+		$updatePost = $db->prepare('UPDATE posts chapter = :chapter, title = :title, $content = :content, update_date = NOW() WHERE id= :id');
+		$updatePost->execute(array(
+							'chapter' => $chapter,
+							'title' => $title,
+							'content' => $content,
+							'id' => $id));
+
+		return $updatePost;
+	}
 }
