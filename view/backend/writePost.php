@@ -12,6 +12,9 @@
 				echo "Le chapitre n'a pas pu être ajouté";
 			}
 		}
+		elseif(!empty($_GET['chapter']) && $_GET['chapter'] == 'exist'){
+				echo "Le chapitre existe déjà !";
+		}
 		elseif (!empty($_GET['complete']) && $_GET['complete'] == 'no'){
 				echo "Les informations ne sont pas complétes";
 			}
