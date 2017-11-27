@@ -3,12 +3,11 @@
   		<script>tinymce.init({ selector:\'textarea\' });</script>'?>
 
 <?php ob_start();
-
 		if (!empty($_GET['complete']) && $_GET['complete'] == 'no'){
 				echo "Les informations ne sont pas complétes";
 			}
 		else{}
-			?>
+?>
 		
 		
 		

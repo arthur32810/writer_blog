@@ -1,9 +1,19 @@
 <?php $title = 'Mon Blog !'; ?>
 
-<?php ob_start(); ?>
+<?php ob_start(); 
 
-<a href="index.php?action=deconnection"> Deconnection </a> <br/>
-<a href="index.php?action=connect"> Connection </a>
+		if (!empty($_GET['update'])){
+			if ($_GET['update'] == 'yes'){
+				echo "Le Chapitre à été modifié";
+			}
+			elseif($_GET['create'] == 'no'){
+				echo "Le chapitre n'a pas pu être modifié";
+			}
+		} ?>
+<div>		
+	<a href="index.php?action=deconnection"> Deconnection </a> <br/>
+	<a href="index.php?action=connect"> Connection </a>
+</div>
 
 
 		<h1> Mon super blog ! </h1>
