@@ -25,15 +25,22 @@
 
 	<form action="index.php?action=create_post" method="post">
 		<div>
-			<label for="title">Titre</label><br />
-			<input type="text" id="title" name="title" />
+			<label for="title">Titre</label>
+			<input type="text" id="title" name="title" value="<?= $post['title']?>" /> <br/>
 		</div> <br/>
+
+		<div>
+			<label for="chapter">Chapitre n°</label>
+			<input type="number" id="chapter" name="chapter" value="<?= $post['chapter']?>" />
+		</div> <br/>
+
 		<div>
 			<label for="content">Texte</label><br />
-			<textarea id="content" name="content"></textarea>
+			<textarea id="content" name="content"> <?= $post['content']?></textarea>
 		</div> <br/>
+
 		<div>
-			<input type="submit" />
+			<input type="submit" value="Modifier"/>
 		</div>
 	</form>
 
