@@ -61,4 +61,13 @@ class PostManager extends Manager
 
 		return $updatePost;
 	}
+
+	public function deletePost($id){
+		$db = Manager::dbConnect();
+
+		$deletePost = $db->prepare('DELETE FROM posts WHERE id =?');
+		$deletePost->execute(array($id));
+
+		return $deletePost;
+	}
 }
