@@ -1,5 +1,12 @@
 <?php $title="Connexion" ?>
-<?php ob_start(); ?>
+<?php ob_start(); 
+
+	if (!empty($_GET['add']) && $_GET['add'] == 'yes'){
+			echo "Vous avez bien été inscrit(e)";
+		}
+?>
+
+<h1> Connection à votre profil </h1>
 
 	<form action="index.php?action=connection" method="post">
 		<div>
@@ -9,7 +16,7 @@
 
 		<div>
 			<label for="pass">Mot de passe :</label>
-			<input type="text" id="pass" name="pass" value="<?= $pass ?>" />
+			<input type="password" id="pass" name="pass" value="<?= $pass ?>" />
 		</div>
 
 		<div>

@@ -29,7 +29,7 @@ function addUser(){
 			    header('Location: index.php?action=inscription&add=no');
 			}
 			else {
-			    header('Location: index.php?action=listPosts&add=yes');
+			    header('Location: index.php?action=connect&add=yes');
 			}
 	}
 }
@@ -104,7 +104,7 @@ function updateUser(){
 			}
 			else{$role = $user['role']; }
 
-			$updateUser = $userManager->updateUser($user['id'], $pseudo, $mdp_crypt, $role);
+			$updateUser = $userManager->updateUser($_POST['id'], $pseudo, $mdp_crypt, $role);
 
 			if ($updateUser === false) {
 			    header('Location: index.php?action=updateUser&add=no');
@@ -121,6 +121,18 @@ function updateUser(){
 		$pass = $userManager->Cryptage($user['password']);
 		require('view/frontend/userUpdate.php');
 	}
+}
+
+function deleteUser(){
+	$userManager = new Arthur\WriterBlog\Model\UserManager();
+
+	$deleteUser = $userManager->deleteUser($_POST['id']);
+	if ($updateUser === false) {
+		    header('Location: index.php?action=updateUser&deleteUser=no');
+		}
+		else {
+		    header('Location: index.php?action=listPosts&deleteUser=yes');
+		}
 }
 
 function deconnection(){

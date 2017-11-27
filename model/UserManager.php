@@ -69,6 +69,23 @@ class UserManager extends Manager
 		return $updateUser;
 	}
 
+	function deleteUser($id){
+		$db = Manager::dbConnect();
+
+		$deleteUser = $db->prepare('DELETE FROM users WHERE id =?');
+		$deleteUser->execute(array($id));
+
+		// Suppression des variables de session et de la session
+		$_SESSION = array();
+		session_destroy();
+
+		// Suppression des cookies de connexion automatique
+		setcookie('login', '');
+		setcookie('pass_hache', '');
+
+		return $deleteUser;
+	}
+
 	function Cryptage($MDP){
 
 	$Clef = 'blog_ecrivain_OC';

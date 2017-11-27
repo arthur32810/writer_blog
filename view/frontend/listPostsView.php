@@ -23,15 +23,16 @@
 			}
 		}
 
-		elseif (!empty($_GET['add']) && $_GET['add'] == 'yes'){
-			echo "Vous avez bien été inscrit(e)";
-		}
 		elseif (!empty($_GET['updateUser']) && $_GET['updateUser'] == 'yes'){
 			echo "Votre profil a bien été mis à jour";
+		}
+		elseif (!empty($_GET['deleteUser']) && $_GET['deleteUser'] == 'yes'){
+			echo "Votre profil a bien été supprimé";
 		}
 		elseif (!empty($_GET['connected']) && $_GET['connected'] == 'no'){
 			echo "Vous n'avez pas le droit d'accéder à cette page";
 		}
+
 	 ?>
 <div>	
 	<a href="index.php?action=write_post"> Ecriture </a> <br/>	

@@ -100,7 +100,11 @@
 				header('Location: index.php?action=listPosts&connected=no');
 				exit();
 			}
-			else{updateUser();}
+			else{
+				if(!empty($_POST['update'])) { updateUser();}
+				elseif(!empty($_POST['delete'])){deleteUser();}
+				else{updateUser();}
+			}
 		}
 
 		elseif($_GET['action'] == 'deconnection'){
