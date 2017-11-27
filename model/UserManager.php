@@ -19,7 +19,7 @@ class UserManager extends Manager
 	public function addUser($pseudo, $pass){
 		$db = Manager::dbConnect();
 
-		$role = 'user';
+		$role = 'view';
 
 		$addUser = $db->prepare('INSERT INTO users(pseudo, password, role) VALUES (:pseudo, :pass, :role)');
 		$addUser->execute(array('pseudo' => $pseudo,
@@ -55,4 +55,40 @@ class UserManager extends Manager
 		setcookie('login', '');
 		setcookie('pass_hache', '');
 	}
+
+	public function updateUser($id, $pseudo, $pass, $role){
+		$db = Manager::dbConnect();
+
+		$updateUser = $db->prepare('UPDATE users SET pseudo =:pseudo, password=:pass, role=:role WHERE id=:id');
+		$updateUser->execute(array(
+							'pseudo' => $pseudo,
+							'pass' => $pass,
+							'role'=> $role,
+							'id' => $id));
+
+		return $updateUser;
+	}
+
+	function Cryptage($MDP){
+
+	$Clef = 'blog_ecrivain_OC';
+
+	$LClef = strlen($Clef);
+	$LMDP = strlen($MDP);
+						
+	if ($LClef < $LMDP){
+				
+		$Clef = str_pad($Clef, $LMDP, $Clef, STR_PAD_RIGHT);
+	
+	}
+				
+	elseif ($LClef > $LMDP){
+
+		 $_Clef = substr($Clef, 0,  $LMDP - $LClef);
+				
+	}
+			
+	return $MDP ^ $Clef; // La fonction envoie le texte crypté
+			
+}
 }

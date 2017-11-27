@@ -91,6 +91,18 @@
 			else{ echo "pseudo ou mot de passe non présent";}
 		}
 
+		elseif($_GET['action'] == 'updateUser'){
+			session_start();
+
+			if (!isset($_SESSION['pseudo']))
+			{
+				//On n'est pas connecté
+				header('Location: index.php?action=listPosts&connected=no');
+				exit();
+			}
+			else{updateUser();}
+		}
+
 		elseif($_GET['action'] == 'deconnection'){
 			session_start();
 			deconnection();

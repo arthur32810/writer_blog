@@ -19,11 +19,13 @@ function addUser(){
 	else{ 
 
 		$pseudo= htmlspecialchars(strip_tags($_POST['pseudo'])); 			
-		$pass= sha1(htmlspecialchars(strip_tags($_POST['pass'])));
+		$pass= htmlspecialchars(strip_tags($_POST['pass']));
 
-		$addUser = $userManager->addUser($pseudo, $pass);
+		$mdp_crypt = $userManager->Cryptage($pass);
 
-		if ($updatePost === false) {
+		$addUser = $userManager->addUser($pseudo, $mdp_crypt);
+
+		if ($addUser === false) {
 			    header('Location: index.php?action=inscription&add=no');
 			}
 			else {
@@ -53,9 +55,9 @@ function connection(){
 
 	$pseudo= htmlspecialchars(strip_tags($_POST['pseudo'])); 
 	$pass= htmlspecialchars(strip_tags($_POST['pass']));
-	$pass_hache = sha1($pass);
+	$mdp_crypt = $userManager->Cryptage($pass);
 
-	$connexion = $userManager->connection($pseudo, $pass_hache);
+	$connexion = $userManager->connection($pseudo, $mdp_crypt);
 
 	if(!empty($connexion)){
 		session_start();
@@ -76,9 +78,57 @@ function connection(){
 		}
 }
 
-function deconnection(){
-		$userManager = new Arthur\WriterBlog\Model\UserManager();
-		$deconnection = $userManager->deconnection();
+function updateUser(){
+	$userManager = new Arthur\WriterBlog\Model\UserManager();
 
-		header('Location: index.php');
+	if($_SESSION['role'] == 'admin' && !isset($_GET['require_admin'])){
+		$pseudo ='';
+		$pass='';
+		require('view/frontend/userUpdate.php');
+	}
+	else{
+
+		if(!empty($_GET['pseudo'])){
+			$pseudo = $_GET['pseudo'];
+		}
+		else{ $pseudo = $_SESSION['pseudo']; }
+
+		$user = $userManager->getUser($pseudo);
+
+		if(!empty($_GET['require']) == 'ok'){
+			if(!empty($_POST['pseudo']) && !empty($_POST['pass'])){
+				if(!empty($_POST['newPass']) && !empty($_POST['confirmNewPass']) && $_POST['newPass']==$_POST['confirmNewPass']) {
+					$pass = htmlspecialchars($_POST['newPass']);
+				}
+				
+				$pseudo= htmlspecialchars(strip_tags($_POST['pseudo'])); 			
+				$pass= htmlspecialchars(strip_tags($_POST['pass']));
+
+				$mdp_crypt = $userManager->Cryptage($pass);
+
+				$updateUser = $userManager->updateUser($user['id'], $pseudo, $mdp_crypt, $user['role']);
+
+				if ($updateUser === false) {
+				    header('Location: index.php?action=updateUser&add=no');
+				}
+				else {
+				    header('Location: index.php?action=listPosts&updateUser=yes');
+				}
+
+			}
+			else{header('Location: index.php?action=updateUser&complete=no');}
+		}
+		else{
+			$pseudo = $user['pseudo'];
+			$pass = $userManager->Cryptage($user['password']);
+			require('view/frontend/userUpdate.php');
+		}
+	}
+}
+
+function deconnection(){
+	$userManager = new Arthur\WriterBlog\Model\UserManager();
+	$deconnection = $userManager->deconnection();
+
+	header('Location: index.php');
 }
