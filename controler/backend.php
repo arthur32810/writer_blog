@@ -15,7 +15,7 @@ function createPost(){
     $post = $postManager->getPost('',$_POST['chapter']);
 
     if(!empty($post)){
-    	echo "Le chapitre existe déjà";
+    	header('Location: index.php?action=write_post&chapter=exist');
     }
     else{
 
