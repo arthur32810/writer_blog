@@ -34,7 +34,7 @@ function post()
     $postManager = new Arthur\WriterBlog\Model\PostManager();
     $commentManager = new  Arthur\WriterBlog\Model\CommentManager();
 
-    $post = $postManager->getPost(htmlspecialchars($_GET['id']));
+    $post = $postManager->getPost(htmlspecialchars($_GET['id']),'');
 
       if(!empty($_GET['comment_page']) && $_GET['comment_page']>0)
     {

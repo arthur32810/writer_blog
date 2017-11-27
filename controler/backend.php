@@ -12,7 +12,9 @@ function writePost()
 function createPost(){
     $postManager = new Arthur\WriterBlog\Model\PostManager();
 
-    $createPost = $postManager->createPost($_POST['title'], $_POST['content']);
+    $post = $postManager->getPost('',$_POST['chapter']);
+
+    $createPost = $postManager->createPost($_POST['chapter'], $_POST['title'], $_POST['content']);
 
      if ($createPost === false) {
         header('Location: index.php?action=write_post&create=no');
@@ -25,7 +27,7 @@ function createPost(){
 function updateWrite(){
 	$postManager = new Arthur\WriterBlog\Model\PostManager();
 
-	$post = $postManager->getPost($_GET['postId']);
+	$post = $postManager->getPost($_GET['postId'],'');
 
 	require('view/backend/updatePost.php');
 }
@@ -35,7 +37,7 @@ function updatePost(){
 
 	$id = $_GET['id'];
 
-	$existPost = $postManager->getPost($_GET['id']);
+	$existPost = $postManager->getPost($_GET['id'],'');
 
 	if(!empty($existPost)){ 
 		$updatePost = $postManager->updatePost($_GET['id'], $_POST['chapter'], $_POST['title'], $_POST['content']);
@@ -55,7 +57,7 @@ function updatePost(){
 function deletePost(){
 	$postManager = new Arthur\WriterBlog\Model\PostManager();
 
-	$existpost = $postManager->getPost($_GET['id']);
+	$existpost = $postManager->getPost($_GET['id'],'');
 
 	if(!empty($existpost)){ 
 		$deletePost = $postManager->deletePost($_GET['id']);
