@@ -25,7 +25,7 @@ function createPost(){
 	        header('Location: index.php?action=write_post&create=no');
 	    }
 	    else {
-	        header('Location: index.php?action=write_post&create=yes');
+	        header('Location: index.php?action=listPosts&create=yes');
 	    }
 	}
 }

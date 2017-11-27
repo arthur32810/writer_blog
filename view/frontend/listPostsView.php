@@ -1,14 +1,19 @@
 <?php $title = 'Mon Blog !'; ?>
 
-<?php ob_start(); 
+<?php ob_start();
 
-		if (!empty($_GET['update'])){
+		if (!empty($_GET['create']) && $_GET['create'] == 'yes'){
+				echo "Le Chapitre à été ajouté";
+			}
+			
+		elseif (!empty($_GET['update'])){
 			if ($_GET['update'] == 'yes'){
 				echo "Le Chapitre à été modifié";
 			}
 			elseif($_GET['create'] == 'no'){
 				echo "Le chapitre n'a pas pu être modifié";
 			}
+		}
 		elseif(!empty($_GET['delete'])){
 			if($_GET['delete'] == 'yes'){
 				echo "Le Chapitre à été supprimé";
@@ -17,7 +22,7 @@
 				echo "Le chapitre n'a pas pu être supprimé";
 			}
 		}
-		} ?>
+	 ?>
 <div>	
 	<a href="index.php?action=write_post"> Ecriture </a> <br/>	
 	<a href="index.php?action=deconnection"> Deconnection </a> <br/>
