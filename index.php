@@ -55,17 +55,18 @@
 			elseif($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'author'){
 
 					if(!empty($_POST['update'])){
-						updatePost();
+						if(!empty($_POST['chapter']) &&!empty($_POST['title']) && !empty($_POST['content'])){ updatePost(); }
+						else{ header('Location: index.php?action=write_post&complete=no'); }
 					}
 					elseif(!empty($_POST['delete'])){
-						deletePost();
+						if(!empty($_POST['chapter']) &&!empty($_POST['title']) && !empty($_POST['content'])){ deletePost(); }
+						else{ header('Location: index.php?action=write_post&complete=no');}
 					}
 					else{
 						updateWrite();
 					}
 			}
-
-			else { echo "Vous n'avez pas le droit de voir cette page";}
+			else { echo "Vous n'avez pas le droit de voir cette page"; }
 		}
 
 		elseif($_GET['action'] == 'connect'){
