@@ -25,5 +25,7 @@ function createPost(){
 function updatePost(){
 	$postManager = new Arthur\WriterBlog\Model\PostManager();
 
-	$updatePost = $postManager->getPost();
+	$post = $postManager->getPost($_GET['postId']);
+
+	require('view/backend/updatePost.php');
 }

@@ -6,6 +6,7 @@
 	if (isset($_GET['action'])) {
 
 		if ($_GET['action'] == 'listPosts') {
+			session_start();
 			listPosts();
 		}
 
@@ -72,4 +73,5 @@
 		}
 	}
 
-	else { listPosts(); }
+	else { session_start();
+			listPosts(); }

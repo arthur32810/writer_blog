@@ -4,7 +4,7 @@
 
 <?php ob_start();
 		
-		if (!empty($_GET['create'])){
+		/*if (!empty($_GET['create'])){
 			if ($_GET['create'] == 'yes'){
 				echo "Le Chapitre à été ajouté";
 			}
@@ -15,13 +15,13 @@
 		elseif (!empty($_GET['complete']) && $_GET['complete'] == 'no'){
 				echo "Les informations ne sont pas complétes";
 			}
-		else{}
+		else{}*/
 			?>
 		
 		
 		
 	
-	<h1> Ecriture d'un chapitre </h1>
+	<h1> Modification du chapitre:  </h1>
 
 	<form action="index.php?action=create_post" method="post">
 		<div>

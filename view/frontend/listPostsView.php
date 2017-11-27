@@ -25,6 +25,10 @@
                     <br />
                     <em><a href="index.php?action=post&&id=<?= $data['id']?>"> Lire le chapitre</a></em>
                 </p>
+               <?php 
+               if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'author'){?> 
+           			<a href="index.php?action=update_post&postId=<?= $data['id']?>"> Modification </a> <?php 
+           		}?>
             </section>
 			
 		<?php }
