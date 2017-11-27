@@ -22,7 +22,7 @@ function createPost(){
     }
 }
 
-function updatePost(){
+function updateWrite(){
 	$postManager = new Arthur\WriterBlog\Model\PostManager();
 
 	$post = $postManager->getPost($_GET['postId']);
