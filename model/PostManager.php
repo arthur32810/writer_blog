@@ -52,7 +52,7 @@ class PostManager extends Manager
 	public function updatePost($id, $chapter, $title, $content){
 		$db = Manager::dbConnect();
 
-		$updatePost = $db->prepare('UPDATE posts chapter = :chapter, title = :title, $content = :content, update_date = NOW() WHERE id= :id');
+		$updatePost = $db->prepare('UPDATE posts SET chapter = :chapter, title = :title, content = :content, update_date = NOW() WHERE id= :id');
 		$updatePost->execute(array(
 							'chapter' => $chapter,
 							'title' => $title,
