@@ -3,16 +3,8 @@
   		<script>tinymce.init({ selector:\'textarea\' });</script>'?>
 
 <?php ob_start();
-		
-		if (!empty($_GET['update'])){
-			if ($_GET['update'] == 'yes'){
-				echo "Le Chapitre à été modifié";
-			}
-			elseif($_GET['create'] == 'no'){
-				echo "Le chapitre n'a pas pu être modifié";
-			}
-		}
-		elseif (!empty($_GET['complete']) && $_GET['complete'] == 'no'){
+
+		if (!empty($_GET['complete']) && $_GET['complete'] == 'no'){
 				echo "Les informations ne sont pas complétes";
 			}
 		else{}
