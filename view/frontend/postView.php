@@ -10,7 +10,9 @@
 					document.getElementById(elem).style.display="none";
 				  }
 			   }
-		</script>'?>
+		</script>
+		<script src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>'?>
 
 <?php ob_start();
 
@@ -49,6 +51,24 @@
 					le <?= $comment['comment_date_fr'] ?> 
 				</p>					
 				<p> <?= htmlspecialchars($comment['comment']) ?> </p>
+
+				<p> <button data-toggle="modal" href="#infos" class="btn btn-primary">Signaler</button>
+					<div class="modal" id="infos">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal">x</button>
+					        <h4 class="modal-title">Plus d'informations</h4>
+					      </div>
+					      <div class="modal-body">
+					        Le Tigre (Panthera tigris) est un mammifère carnivore de la famille des félidés...
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					<script src="assets/js/jquery.js"></script>
+   					<script src="assets/js/bootstrap.min.js"></script>
+				</p>
 
 				<p> <?php if($comment['user_id'] == $_SESSION['id'] || $_SESSION['role']=='admin'){ ?>
 							<form method="POST" action="index.php?action=deleteComment&id=<?= $post['id']?>&idComment=<?= $comment['id']?>">
