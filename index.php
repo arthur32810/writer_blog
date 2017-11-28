@@ -11,6 +11,7 @@
 		}
 
 		elseif ($_GET['action'] == 'post'){
+			session_start();
 			if (isset($_GET['id']) && $_GET['id'] > 0) {
 				post();
 			}

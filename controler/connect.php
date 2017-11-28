@@ -65,6 +65,7 @@ function connection(){
 		$_SESSION['pseudo'] = $pseudo;
 		$_SESSION['pass'] = $pass;
 		$_SESSION['role'] = $connexion['role'];
+		$_SESSION['id'] = $connexion['id'];
 
 		if(!empty($_POST['cookie']))
 			{
