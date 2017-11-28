@@ -37,4 +37,6 @@ class ModerationManager extends Manager
 
 		return $moderation;
 	}
+
+	public function testModeration(){echo "test";}
 }

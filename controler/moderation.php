@@ -31,6 +31,8 @@ function addModeration (){
 function moderation(){
 	if($_SESSION['role']=='admin'){
 		$moderationManager = new Arthur\WriterBlog\Model\ModerationManager();
+		$postManager = new Arthur\WriterBlog\Model\PostManager();
+		$commentManager = new  Arthur\WriterBlog\Model\CommentManager();
 
 		$pagingModeration = $moderationManager->pagingModeration();
 
@@ -49,11 +51,11 @@ function moderation(){
 	        $limit2 = 10;
 	    }
 
-	    $moderation = $moderationManager->getModeration($limit1, $limit2);
+	    $moderations = $moderationManager->getModeration($limit1, $limit2);
 	    $pagingModeration = $moderationManager->pagingModeration();
 
-	    
-	    //require('view/backend/moderationView.php');
+
+	    require('view/backend/moderationView.php');
 	}
 	else{header('Location: index.php?action=listPosts&right=no');}
 
