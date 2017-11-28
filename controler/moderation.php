@@ -1,0 +1,29 @@
+<?php
+require_once('controler/listModel.php');
+
+	function addModeration (){
+		$postManager = new Arthur\WriterBlog\Model\PostManager();
+		$commentManager = new  Arthur\WriterBlog\Model\CommentManager();
+		$moderationManager = new Arthur\WriterBlog\Model\ModerationManager();
+
+		$idComment = htmlspecialchars($_GET['commentId']);
+    	$idPost = htmlspecialchars($_GET['postId']);
+
+		$post = $postManager->getPost($idPost,'');
+
+   	 if(!empty($post)){
+   	 	$existComment = $commentManager->getComment($idComment);
+
+        if(!empty($existComment)){
+        	$addModeration = $moderationManager->addModeration($idComment, $idPost, htmlspecialchars($_POST['cause']));
+   	 		if ($addModeration === false) {
+                header('Location: index.php?action=post&id='.$idPost.'&addModeration=no');
+            }
+            else {
+                header('Location: index.php?action=post&id='.$idPost.'&addModeration=yes');
+            }
+   	 	}
+   	 	 else{header('Location: index.php?action=post&id='.$idPost.'&idComment=no');  }
+    }
+     else{header('Location: index.php?action=listPosts&existPost=no');}
+}

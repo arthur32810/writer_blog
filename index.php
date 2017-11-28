@@ -3,6 +3,7 @@
 	require_once('controler/postAuthor.php');
 	require_once('controler/comment.php');
 	require_once('controler/connect.php');
+	require_once('controler/moderation.php');
 	
 	if (isset($_GET['action'])) {
 
@@ -138,7 +139,12 @@
 			session_start();
 			deconnection();
 		}
-	}
 
+		// Modération 
+
+		elseif ($_GET['action'] == 'addModeration') {
+			addModeration();
+		}
+	}
 	else { session_start();
 			listPosts(); }

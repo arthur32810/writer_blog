@@ -52,53 +52,56 @@
 				</p>					
 				<p> <?= htmlspecialchars($comment['comment']) ?> </p>
 
-				<p> <button data-toggle="modal" href="#signaler" class="btn btn-primary">Signaler</button>
-					<div class="modal fade" id="signaler">
-					  <div class="modal-dialog">
-					    <div class="modal-content">
-					      <div class="modal-header">
-					        <button type="button" class="close" data-dismiss="modal">x</button>
-					        <h4 class="modal-title">Signaler ce commentaire</h4>
-					      </div>
-					      <div class="modal-body">
-					       	<form method="post" action="#">
-							   <p>
-							      <label>Raison du signalement : </label> <br/>
-							      <input type="text" name="cause" /> <br />
-							   </p>
+				<?php 
+					if(!empty($_SESSION['pseudo'])){?> 
+						<p> <button data-toggle="modal" href="#signaler" class="btn btn-primary">Signaler</button>
+							<div class="modal fade" id="signaler">
+							  <div class="modal-dialog">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <button type="button" class="close" data-dismiss="modal">x</button>
+							        <h4 class="modal-title">Signaler ce commentaire</h4>
+							      </div>
+							      <div class="modal-body">
+							       	<form method="post" action="index.php?action=addModeration&postId=<?= $post['id'] ?>&commentId=<?= $comment['id']?>">
+									   <p>
+									      <label>Raison du signalement : </label> <br/>
+									      <input type="text" name="cause" required/> <br />
+									   </p>
 
-							   <button type="submit" class="btn"> Signaler </button>
-							</form>
-					      </div>
-					      <div class="modal-footer">
-					        <button class="btn btn-info" data-dismiss="modal">Annuler</button>
-					      </div>
-					    </div>
-					  </div>
-					</div>
-					<script src="assets/js/jquery.js"></script>
-   					<script src="assets/js/bootstrap.min.js"></script>
-				</p>
-
-				<p> <?php if($comment['user_id'] == $_SESSION['id'] || $_SESSION['role']=='admin'){ ?>
-							<form method="POST" action="index.php?action=deleteComment&id=<?= $post['id']?>&idComment=<?= $comment['id']?>">
-								<button onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre commentaire ')"> Supprimé </button>
-							</form>
-
-							<a href="" onclick="bascule('update'); return false;"> Modifier le commentaire </a>
-							<div id='update' style='display:none;'> 
-								<form action="index.php?action=updateComment&amp;id=<?= $post['id'] ?>&idComment=<?= $comment['id']?>" method="post">
-									<div>
-										<label for="comment"> Modifier votre Commentaire</label><br />
-										<textarea id="comment" name="comment" required> <?= $comment['comment']?></textarea>
-									</div>
-									<div>
-										<input type="submit" value="Modifier"/>
-									</div>
-								</form>
+									   <button type="submit" class="btn"> Signaler </button>
+									</form>
+							      </div>
+							      <div class="modal-footer">
+							        <button class="btn btn-info" data-dismiss="modal">Annuler</button>
+							      </div>
+							    </div>
+							  </div>
 							</div>
-						
-					<?php } ?>
+						</p> 
+				<?php } ?>
+
+				<p> <?php if (!empty($_SESSION['pseudo'])){
+							if( $comment['user_id'] == $_SESSION['id'] || $_SESSION['role']=='admin'){ ?>
+										<form method="POST" action="index.php?action=deleteComment&id=<?= $post['id']?>&idComment=<?= $comment['id']?>">
+											<button onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre commentaire ')"> Supprimé </button>
+										</form>
+
+										<a href="" onclick="bascule('update'); return false;"> Modifier le commentaire </a>
+										<div id='update' style='display:none;'> 
+											<form action="index.php?action=updateComment&amp;id=<?= $post['id'] ?>&idComment=<?= $comment['id']?>" method="post">
+												<div>
+													<label for="comment"> Modifier votre Commentaire</label><br />
+													<textarea id="comment" name="comment" required> <?= $comment['comment']?></textarea>
+												</div>
+												<div>
+													<input type="submit" value="Modifier"/>
+												</div>
+											</form>
+										</div>
+									
+								<?php } 
+							}?>
 				</p>
 			</div>
 			

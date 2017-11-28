@@ -32,3 +32,11 @@
 			echo "Le Commentaire a été supprimé";
 		}	
 	}
+	elseif(!empty($_GET['addModeration'])){
+			if($_GET['addModeration'] == 'yes'){
+				echo "Le commentaire a bien été signalé";
+			}
+			elseif($_GET['delete'] == 'no'){
+				echo "Le commentaire n'a pas pu être signalé";
+			}
+		}

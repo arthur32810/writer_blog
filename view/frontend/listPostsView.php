@@ -29,7 +29,7 @@
                 <p>
                     <?= $data['content'] ?>
                     <br />
-                    <em><a href="index.php?action=post&&id=<?= $data['id']?>"> Lire le chapitre</a></em>
+                    <em><a href="index.php?action=post&id=<?= $data['id']?>"> Lire le chapitre</a></em>
                 </p>
                <?php 
                if(!empty($_SESSION['role']) && $_SESSION['role'] == 'admin' || !empty($_SESSION['role']) && $_SESSION['role'] == 'author'){ ?> 
