@@ -47,9 +47,16 @@ function connect(){
 }
 
 function connection(){
-	$userManager = new Arthur\WriterBlog\Model\UserManager();
 
-	
+	// Suppression des variables de session et de la session
+	$_SESSION = array();
+	session_destroy();
+
+	// Suppression des cookies de connexion automatique
+	setcookie('login', '');
+	setcookie('pass_hache', '');
+
+	$userManager = new Arthur\WriterBlog\Model\UserManager();
 
 	$pseudo= htmlspecialchars(strip_tags($_POST['pseudo'])); 
 	$pass= htmlspecialchars(strip_tags($_POST['pass']));

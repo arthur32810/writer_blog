@@ -10,7 +10,8 @@
 	<a href="index.php?action=inscription"> Inscription au site </a> <br/>
 	<a href="index.php?action=updateUser"> Modification d'un utilisateur </a> <br>
 	<a href="index.php?action=deconnection"> Deconnection </a> <br/>
-	<a href="index.php?action=connect"> Connection </a>
+	<a href="index.php?action=connect"> Connection </a> <br/>
+	<a href="index.php?action=moderation"> Moderation </a>
 </div>
 
 

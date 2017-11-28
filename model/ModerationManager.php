@@ -17,4 +17,24 @@ class ModerationManager extends Manager
 		return $addModeration;
 	}
 
+	public function pagingModeration(){
+		$db = Manager::dbConnect();
+
+		$paging = $db->query('SELECT COUNT(*) AS nb_moderation FROM moderation');
+		$data = $paging->fetch();
+	    $nb_moderation = $data['nb_moderation']; // retourne le nombre d'entrée
+
+	    $nb_paging = (int) ($nb_moderation / 10); // divise par 10
+	    $nb_paging++;
+
+	    return $nb_paging;
+	}
+
+	public function getModeration(){
+		$db = Manager::dbConnect();
+
+		$moderation = $db->query('SELECT * FROM moderation');
+
+		return $moderation;
+	}
 }

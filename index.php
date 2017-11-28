@@ -18,7 +18,7 @@
 				post();
 			}
 			else {
-				echo 'Erreur : aucun identifiant de billet envoyé';
+				header('Location: index.php?action=listPosts&existPost=no');
 			}
 		}
 
@@ -55,7 +55,7 @@
 					exit();
 				}
 				elseif($_SESSION['role'] == 'author'){ writePost();}
-				else { echo "Vous n'avez pas le droit de voir cette page";}
+				else { header('Location: index.php?action=listPosts&right=no');}
 
 				
 		}
@@ -92,7 +92,7 @@
 						updateWrite();
 					}
 			}
-			else { echo "Vous n'avez pas le droit de voir cette page"; }
+			else { header('Location: index.php?action=listPosts&right=no'); }
 		}
 
 		// Espace membres
@@ -116,7 +116,7 @@
 			if(!empty($_POST['pseudo']) && !empty(['pass'])){
 					connection(); 
 			}
-			else{ echo "pseudo ou mot de passe non présent";}
+			else{ header('Location: index.php?action=connect&complete=no');}
 		}
 
 		elseif($_GET['action'] == 'updateUser'){
@@ -144,6 +144,10 @@
 
 		elseif ($_GET['action'] == 'addModeration') {
 			addModeration();
+		}
+		elseif ($_GET['action'] == 'moderation') {
+			session_start();
+			moderation();
 		}
 	}
 	else { session_start();

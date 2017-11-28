@@ -4,6 +4,9 @@
 	if (!empty($_GET['add']) && $_GET['add'] == 'yes'){
 			echo "Vous avez bien été inscrit(e)";
 		}
+	elseif (!empty($_GET['complete']) && $_GET['complete'] == 'no'){
+			echo "pseudo ou mot de passe non présent";
+		}
 ?>
 
 <h1> Connection à votre profil </h1>

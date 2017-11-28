@@ -1,6 +1,9 @@
 <?php if (!empty($_GET['create']) && $_GET['create'] == 'yes'){
 				echo "Le Chapitre à été ajouté";
 			}
+		if (!empty($_GET['right']) && $_GET['right'] == 'no'){
+				echo "Vous n'avez pas le droit de voir cette page";
+			}
 		elseif (!empty($_GET['existPost']) &&$_GET['existPost'] == 'no'){
 			echo "Le chapitre n'existe pas";
 		}
