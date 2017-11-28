@@ -38,7 +38,7 @@
 					<textarea id="comment" name="comment" required></textarea>
 				</div>
 				<div>
-					<input type="submit" />
+					<input type="submit" class="btn" />
 				</div>
 			</form>
 	<?php	}
@@ -52,16 +52,26 @@
 				</p>					
 				<p> <?= htmlspecialchars($comment['comment']) ?> </p>
 
-				<p> <button data-toggle="modal" href="#infos" class="btn btn-primary">Signaler</button>
-					<div class="modal" id="infos">
+				<p> <button data-toggle="modal" href="#signaler" class="btn btn-primary">Signaler</button>
+					<div class="modal fade" id="signaler">
 					  <div class="modal-dialog">
 					    <div class="modal-content">
 					      <div class="modal-header">
 					        <button type="button" class="close" data-dismiss="modal">x</button>
-					        <h4 class="modal-title">Plus d'informations</h4>
+					        <h4 class="modal-title">Signaler ce commentaire</h4>
 					      </div>
 					      <div class="modal-body">
-					        Le Tigre (Panthera tigris) est un mammifère carnivore de la famille des félidés...
+					       	<form method="post" action="#">
+							   <p>
+							      <label>Raison du signalement : </label> <br/>
+							      <input type="text" name="cause" /> <br />
+							   </p>
+
+							   <button type="submit" class="btn"> Signaler </button>
+							</form>
+					      </div>
+					      <div class="modal-footer">
+					        <button class="btn btn-info" data-dismiss="modal">Annuler</button>
 					      </div>
 					    </div>
 					  </div>
