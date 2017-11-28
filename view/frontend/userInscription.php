@@ -17,12 +17,12 @@
 	<form action="index.php?action=addUser" method="post">
 		<div>
 			<label for="pseudo">Pseudo</label>
-			<input type="text" id="pseudo" name="pseudo"/>
+			<input type="text" id="pseudo" name="pseudo" required />
 		</div>
 
 		<div>
 			<label for="pass">Mot de passe :</label>
-			<input type="text" id="pass" name="pass" />
+			<input type="text" id="pass" name="pass" required />
 		</div>
 
 		<div>

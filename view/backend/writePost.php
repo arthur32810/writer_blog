@@ -21,12 +21,12 @@
 	<form action="index.php?action=create_post" method="post">
 		<div>
 			<label for="title">Titre</label><br />
-			<input type="text" id="title" name="title"  />
+			<input type="text" id="title" name="title" required />
 		</div> <br/>
 
 		<div>
 			<label for="chapter">Chapitre n°</label>
-			<input type="number" id="chapter" name="chapter"/>
+			<input type="number" id="chapter" name="chapter" required />
 		</div> <br/>
 
 		<div>

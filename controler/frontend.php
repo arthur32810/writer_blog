@@ -36,24 +36,47 @@ function post()
 
     $post = $postManager->getPost(htmlspecialchars($_GET['id']),'');
 
-      if(!empty($_GET['comment_page']) && $_GET['comment_page']>0)
+    if(!empty($post))
     {
-        $page = htmlspecialchars($_GET['comment_page']);
-    }
-    else {$page = 1;}
+          if(!empty($_GET['comment_page']) && $_GET['comment_page']>0)
+        {
+            $page = htmlspecialchars($_GET['comment_page']);
+        }
+        else {$page = 1;}
 
-    if($page>0){
-        $limit1 = ($page-1)*5;
-        $limit2 = $page*5;
-    }
-    else{
-        $limit1 = 0;
-        $limit2 = 5;
-    }
+        if($page>0){
+            $limit1 = ($page-1)*5;
+            $limit2 = $page*5;
+        }
+        else{
+            $limit1 = 0;
+            $limit2 = 5;
+        }
 
-    $comments = $commentManager->getComments($_GET['id'], $limit1, $limit2);
-    $nb_paging_comments = $commentManager->pagingComments($_GET['id']);
+        $comments = $commentManager->getComments($_GET['id'], $limit1, $limit2);
+        $nb_paging_comments = $commentManager->pagingComments($_GET['id']);
 
-    require('view/frontend/postView.php');
+        require('view/frontend/postView.php');
+    }  
+    else{header('Location: index.php?action=listPosts&existPost=no');}
 }
 
+function addComment()
+{
+    $postManager = new Arthur\WriterBlog\Model\PostManager();
+    $commentManager = new  Arthur\WriterBlog\Model\CommentManager();
+
+    $post = $postManager->getPost(htmlspecialchars($_GET['id']),'');
+
+    if(!empty($post)){
+        $addComment = $commentManager->addComment($_GET['id'], $_SESSION['id'], $_SESSION['pseudo'], $_POST['comment']);
+
+        if ($addComment === false) {
+            header('Location: index.php?action=posts&id='.$_GET['id'].'&addComment=no');
+        }
+        else {
+            header('Location: index.php?action=post&id='.$_GET['id'].'&addComment=yes');
+        }
+    }
+    else{header('Location: index.php?action=listPosts&existPost=no');}
+}

@@ -20,6 +20,14 @@
 			}
 		}
 
+		elseif ($_GET['action'] == 'addComment'){
+			session_start();
+			if(!empty($_POST['comment'])){
+				addComment();
+			}
+			else{ header('Location: index.php?action=post&id='.$_GET['id'].'&complete=no'); }
+		}
+
 		elseif ($_GET['action'] == 'write_post'){
 				session_start();
 
@@ -29,7 +37,7 @@
 					header('Location: index.php?action=connect');
 					exit();
 				}
-				elseif($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'author'){ writePost();}
+				elseif($_SESSION['role'] == 'author'){ writePost();}
 				else { echo "Vous n'avez pas le droit de voir cette page";}
 
 				
@@ -53,15 +61,15 @@
 				exit();
 			}
 
-			elseif($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'author'){
+			elseif($_SESSION['role'] == 'author'){
 
 					if(!empty($_POST['update'])){
 						if(!empty($_POST['chapter']) &&!empty($_POST['title']) && !empty($_POST['content'])){ updatePost(); }
-						else{ header('Location: index.php?action=write_post&complete=no'); }
+						else{ header('Location: index.php?action=update_post&complete=no'); }
 					}
 					elseif(!empty($_POST['delete'])){
 						if(!empty($_POST['chapter']) &&!empty($_POST['title']) && !empty($_POST['content'])){ deletePost(); }
-						else{ header('Location: index.php?action=write_post&complete=no');}
+						else{ header('Location: index.php?action=update_post&complete=no');}
 					}
 					else{
 						updateWrite();

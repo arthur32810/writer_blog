@@ -15,7 +15,7 @@ function createPost(){
     $post = $postManager->getPost('',$_POST['chapter']);
 
     if(!empty($post)){
-    	header('Location: index.php?action=write_post&chapter=exist');
+    	header('Location: index.php?action=update_post&postId='.$post['id'].'&chapter=exist');
     }
     else{
 
@@ -41,8 +41,6 @@ function updateWrite(){
 function updatePost(){
 	$postManager = new Arthur\WriterBlog\Model\PostManager();
 
-	$id = $_GET['id'];
-
 	$existPost = $postManager->getPost($_GET['id'],'');
 
 	if(!empty($existPost)){ 
@@ -52,7 +50,7 @@ function updatePost(){
 		    header('Location: index.php?action=listPosts&update=no');
 		}
 		else {
-		    header('Location: index.php?action=listPosts&update=yes');
+		    header('Location: index.php?action=post&id='.$_GET['id'].'&update=yes');
 		}
 	}
 	else{echo "L'id n'existe pas ! ";}

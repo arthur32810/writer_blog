@@ -11,12 +11,12 @@
 	<form action="index.php?action=connection" method="post">
 		<div>
 			<label for="pseudo">Pseudo</label>
-			<input type="text" id="pseudo" name="pseudo" value="<?= $pseudo ?>"/>
+			<input type="text" id="pseudo" name="pseudo" value="<?= $pseudo ?>" required />
 		</div>
 
 		<div>
 			<label for="pass">Mot de passe :</label>
-			<input type="password" id="pass" name="pass" value="<?= $pass ?>" />
+			<input type="password" id="pass" name="pass" value="<?= $pass ?>" required />
 		</div>
 
 		<div>

@@ -5,14 +5,12 @@
 		if (!empty($_GET['create']) && $_GET['create'] == 'yes'){
 				echo "Le Chapitre à été ajouté";
 			}
+		elseif (!empty($_GET['existPost']) &&$_GET['existPost'] == 'no'){
+			echo "Le chapitre n'existe pas";
+		}
 
-		elseif (!empty($_GET['update'])){
-			if ($_GET['update'] == 'yes'){
-				echo "Le Chapitre à été modifié";
-			}
-			elseif($_GET['create'] == 'no'){
-				echo "Le chapitre n'a pas pu être modifié";
-			}
+		elseif (!empty($_GET['update']) &&$_GET['create'] == 'no'){
+			echo "Le chapitre n'a pas pu être modifié";
 		}
 		elseif(!empty($_GET['delete'])){
 			if($_GET['delete'] == 'yes'){

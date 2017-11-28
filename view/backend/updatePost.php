@@ -6,6 +6,9 @@
 		if (!empty($_GET['complete']) && $_GET['complete'] == 'no'){
 				echo "Les informations ne sont pas complétes";
 			}
+		elseif(!empty($_GET['chapter']) && $_GET['chapter'] == 'exist'){
+				echo "Le chapitre existe déjà !";
+		}
 		else{}
 ?>
 		
@@ -17,17 +20,17 @@
 	<form action="index.php?action=update_post&id=<?= $post['id']?>" method="post">
 		<div>
 			<label for="title">Titre</label>
-			<input type="text" id="title" name="title" value="<?= $post['title']?>" /> <br/>
+			<input type="text" id="title" name="title" value="<?= $post['title']?>" required /> <br/>
 		</div> <br/>
 
 		<div>
 			<label for="chapter">Chapitre n°</label>
-			<input type="number" id="chapter" name="chapter" value="<?= $post['chapter']?>" />
+			<input type="number" id="chapter" name="chapter" value="<?= $post['chapter']?>" required />
 		</div> <br/>
 
 		<div>
 			<label for="content">Texte</label><br />
-			<textarea id="content" name="content"> <?= $post['content']?></textarea>
+			<textarea id="content" name="content" required > <?= $post['content']?></textarea>
 		</div> <br/>
 
 		<div>
