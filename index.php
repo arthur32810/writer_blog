@@ -1,6 +1,7 @@
 <?php								
-	require_once('controler/frontend.php');
-	require_once('controler/backend.php');
+	require_once('controler/post.php');
+	require_once('controler/postAuthor.php');
+	require_once('controler/comment.php');
 	require_once('controler/connect.php');
 	
 	if (isset($_GET['action'])) {
@@ -20,6 +21,8 @@
 			}
 		}
 
+		// Commentaires
+
 		elseif ($_GET['action'] == 'addComment'){
 			session_start();
 			if(!empty($_POST['comment'])){
@@ -27,6 +30,19 @@
 			}
 			else{ header('Location: index.php?action=post&id='.$_GET['id'].'&complete=no'); }
 		}
+
+		elseif($_GET['action'] == 'deleteComment'){
+			deleteComment();
+		}
+		elseif($_GET['action'] == 'updateComment')
+		{
+			if(!empty($_POST['comment'])){
+				updateComment();
+			}
+			else{ header('Location: index.php?action=post&id='.$_GET['id'].'&complete=no'); }
+		}
+
+		// Ecriture chapitre
 
 		elseif ($_GET['action'] == 'write_post'){
 				session_start();
@@ -77,6 +93,8 @@
 			}
 			else { echo "Vous n'avez pas le droit de voir cette page"; }
 		}
+
+		// Espace membres
 
 		elseif($_GET['action'] == 'inscription')
 		{

@@ -31,9 +31,22 @@ class CommentManager extends Manager
 		return $comments;
 	}
 
+	public function getComment($id)
+	{
+		$db = Manager::dbConnect();
+		
+		$comment = $db->prepare('SELECT id, user_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin\') 
+										AS comment_date_fr FROM comments WHERE id = ?');
+		$comment->execute(array($id));
+
+		$comment = $comment->fetch();			
+		
+		return $comment;
+	}
+
 	public function addComment($postId, $userId, $author, $comment)
 	{
-		$db = $this->dbConnect();
+		$db = Manager::dbConnect();
 		
 		$comments = $db->prepare('INSERT INTO comments (post_id, user_id, author, comment, comment_date) VALUES (?, ?, ?, ?, NOW())');
 		$affectedLines = $comments->execute(array($postId, $userId, $author, $comment));
@@ -41,17 +54,22 @@ class CommentManager extends Manager
 		return $affectedLines;
 	}
 
-/*
-	public function updateComment($id, $author, $comment)
-	{
-		$db = $this->dbConnect();
-		
-		$comments = $db->prepare('UPDATE comments SET author = :newauthor, comment = :newcomment, comment_date = NOW() WHERE id = :id');
-		$affectedLines = $comments->execute(array(
-											'newauthor' => $author,
-											'newcomment' => $comment, 
-											'id' => $id));
-		
-		return $affectedLines;
-	}*/
+	public function updateComment($id, $comment){
+		$db = Manager::dbConnect();
+
+		$updateComment = $db->prepare('UPDATE comments SET comment = :comment, comment_date=NOW() WHERE id =:id');
+		$updateComment->execute(array('comment'=>$comment,
+										'id' => $id));
+
+		return $updateComment;
+	}
+
+	public function deleteComment($id){
+		$db = Manager::dbConnect();
+
+		$deleteComment = $db->prepare('DELETE FROM comments WHERE id=?');
+		$deleteComment->execute(array($id));
+
+		return $deleteComment;
+	}
 }

@@ -1,19 +1,20 @@
-<?php $title = "Chapitre ".$post['chapter']." : ".$post['title']; ?>
+<?php $title = "Chapitre ".$post['chapter']." : ".$post['title']; 
+	$script='<script language="javascript" type="text/javascript">
+			function bascule(elem)
+			   {
+				   etat=document.getElementById(elem).style.display;
+				   if(etat=="none"){
+				   document.getElementById(elem).style.display="block";
+			   }
+			   else{
+					document.getElementById(elem).style.display="none";
+				  }
+			   }
+		</script>'?>
 
 <?php ob_start();
 
-	if (!empty($_GET['complete']) && $_GET['complete'] == 'no'){
-		echo "Tous les champs non pas été rempli";
-	}
-	elseif (!empty($_GET['update']) && $_GET['update'] == 'yes'){
-				echo "Le Chapitre à été modifié";
-		}
-	elseif (!empty($_GET['addComment']) &&$_GET['addComment'] == 'no'){
-			echo "Le commentaire n'a pas pu être ajouté";
-		}
-	elseif (!empty($_GET['addComment']) &&$_GET['addComment'] == 'yes'){
-			echo "Le commentaire a été ajouté";
-		}
+	include('conditionPost.php');
 ?>
 
 	<h1> Chapitre <?= $post['chapter'] ?> :   <?= $post['title'] ?> </h1>
@@ -48,6 +49,27 @@
 					le <?= $comment['comment_date_fr'] ?> 
 				</p>					
 				<p> <?= htmlspecialchars($comment['comment']) ?> </p>
+
+				<p> <?php if($comment['user_id'] == $_SESSION['id'] || $_SESSION['role']=='admin'){ ?>
+							<form method="POST" action="index.php?action=deleteComment&id=<?= $post['id']?>&idComment=<?= $comment['id']?>">
+								<button onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre commentaire ')"> Supprimé </button>
+							</form>
+
+							<a href="" onclick="bascule('update'); return false;"> Modifier le commentaire </a>
+							<div id='update' style='display:none;'> 
+								<form action="index.php?action=updateComment&amp;id=<?= $post['id'] ?>&idComment=<?= $comment['id']?>" method="post">
+									<div>
+										<label for="comment"> Modifier votre Commentaire</label><br />
+										<textarea id="comment" name="comment" required> <?= $comment['comment']?></textarea>
+									</div>
+									<div>
+										<input type="submit" value="Modifier"/>
+									</div>
+								</form>
+							</div>
+						
+					<?php } ?>
+				</p>
 			</div>
 			
 		<?php }	
