@@ -57,7 +57,7 @@ class CommentManager extends Manager
 	public function updateComment($id, $comment){
 		$db = Manager::dbConnect();
 
-		$updateComment = $db->prepare('UPDATE comments SET comment = :comment, comment_date=NOW() WHERE id =:id');
+		$updateComment = $db->prepare('UPDATE comments SET comment = :comment, update_date=NOW() WHERE id =:id');
 		$updateComment->execute(array('comment'=>$comment,
 										'id' => $id));
 

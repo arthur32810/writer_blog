@@ -149,6 +149,12 @@
 			session_start();
 			moderation();
 		}
+		elseif ($_GET['action'] == 'updateModeration') {
+			updateModeration();
+		}
+		elseif ($_GET['action'] == 'deleteModeration') {
+			deleteModeration();
+		}
 	}
 	else { session_start();
 			listPosts(); }

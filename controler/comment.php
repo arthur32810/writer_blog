@@ -7,10 +7,13 @@ function addComment()
     $postManager = new Arthur\WriterBlog\Model\PostManager();
     $commentManager = new  Arthur\WriterBlog\Model\CommentManager();
 
-    $post = $postManager->getPost(htmlspecialchars($_GET['id']),'');
+    $postId = htmlspecialchars($_GET['id']);
+    $post = $postManager->getPost($postId,'');
 
     if(!empty($post)){
-        $addComment = $commentManager->addComment($_GET['id'], $_SESSION['id'], $_SESSION['pseudo'], $_POST['comment']);
+        
+        $comment = htmlspecialchars($_POST['comment']);
+        $addComment = $commentManager->addComment($postId, $_SESSION['id'], $_SESSION['pseudo'], $comment);
 
         if ($addComment === false) {
             header('Location: index.php?action=posts&id='.$_GET['id'].'&addComment=no');

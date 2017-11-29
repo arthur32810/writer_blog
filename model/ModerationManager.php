@@ -30,13 +30,31 @@ class ModerationManager extends Manager
 	    return $nb_paging;
 	}
 
-	public function getModeration(){
+	public function getModerations(){
 		$db = Manager::dbConnect();
 
-		$moderation = $db->query('SELECT * FROM moderation');
+		$moderations = $db->query('SELECT * FROM moderation');
+
+		return $moderations;
+	}
+
+	public function getModeration($id){
+		$db = Manager::dbConnect();
+
+		$moderation=$db->prepare('SELECT * FROM moderation WHERE id=?');
+		$moderation->execute(array($id));
+
+		$moderation = $moderation->fetch();
 
 		return $moderation;
 	}
 
-	public function testModeration(){echo "test";}
+	public function deleteModeration($id){
+		$db = Manager::dbConnect();
+
+		$deleteModeration = $db->prepare('DELETE FROM moderation WHERE id = ?');
+		$deleteModeration->execute(array($id));
+
+		return $deleteModeration;
+	}
 }
