@@ -56,6 +56,7 @@
 			       <select name="role" id="role">
 			           <option value="admin">Administrateur</option>
 			           <option value="author">Auteur</option>
+			           <option value="moderator"> Moderateur </option>
 			           <option value="view">Lecteur</option>
 			       </select>
 			</div>
