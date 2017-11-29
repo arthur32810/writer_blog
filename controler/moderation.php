@@ -29,7 +29,7 @@ function addModeration (){
 }
 
 function moderation(){
-	if($_SESSION['role']=='admin'){
+	if($_SESSION['role']=='admin' || $_SESSION['role']=='moderator'){
 		$moderationManager = new Arthur\WriterBlog\Model\ModerationManager();
 		$postManager = new Arthur\WriterBlog\Model\PostManager();
 		$commentManager = new  Arthur\WriterBlog\Model\CommentManager();

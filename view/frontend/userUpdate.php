@@ -53,11 +53,11 @@
 		if($_SESSION['role'] == 'admin'){ ?>
 			<div>
 				<label for="role">Role de l'utilisateur : </label>
-			       <select name="role" id="role">
-			           <option value="admin">Administrateur</option>
-			           <option value="author">Auteur</option>
-			           <option value="moderator"> Moderateur </option>
-			           <option value="view">Lecteur</option>
+			       	<select name="role" id="role">
+			       		<option value="view">Lecteur</option>
+			            <option value="admin">Administrateur</option>
+			            <option value="author">Auteur</option>
+			            <option value="moderator"> Moderateur </option>
 			       </select>
 			</div>
 	<?php } ?>
