@@ -5,42 +5,42 @@
 		include('conditionListPost.php');
 ?>
 
-<div>	
-	<a href="index.php?action=write_post"> Ecriture </a> <br/>	
-	<a href="index.php?action=inscription"> Inscription au site </a> <br/>
-	<a href="index.php?action=updateUser"> Modification d'un utilisateur </a> <br>
-	<a href="index.php?action=deconnection"> Deconnection </a> <br/>
-	<a href="index.php?action=connect"> Connection </a> <br/>
-	<a href="index.php?action=moderation"> Moderation </a>
-</div>
+    <!-- Main Content -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+        <?php		
+			while($data = $posts->fetch())
+			{ ?> 
+				<div class="post-preview">
+					<a href="index.php?action=post&id=<?= $data['id']?>"> 
+		                <h2 class="post-title">
+		                    <?= htmlspecialchars($data['title']) ?>
+		                </h2>
 
+		                <h4 class="post-subtitle">
+		                	 <?= $data['content'] ?>
+		                </h4>
+		            </a>
+		                <p class="post-meta">
+		                   Chapitre n° <?= $data['chapter']?>
+			               <?php 
+			               if(!empty($_SESSION['role']) && $_SESSION['role'] == 'admin' || !empty($_SESSION['role']) && $_SESSION['role'] == 'author'){ ?> 
+			           			<a href="index.php?action=update_post&postId=<?= $data['id']?>"> Modification </a> <?php 
+			           		}?>
+		           		</p>     	
+				</div>
+				<hr>
 
-		<h1> Mon super blog ! </h1>
-		<h2> Derniers billets du blog : </h2>
+			<?php } 
+			$posts->closeCursor();	?>
+          
+        </div>
+      </div>
+    </div>
 	
-	<?php		
-		while($data = $posts->fetch())
-		{ ?> 
 	
-			 <section class="news">
-                <h3>
-                    <?= htmlspecialchars($data['title']) ?>
-                    <em>le <?= $data['creation_date_fr'] ?></em>
-                </h3>
-                <p>
-                    <?= $data['content'] ?>
-                    <br />
-                    <em><a href="index.php?action=post&id=<?= $data['id']?>"> Lire le chapitre</a></em>
-                </p>
-               <?php 
-               if(!empty($_SESSION['role']) && $_SESSION['role'] == 'admin' || !empty($_SESSION['role']) && $_SESSION['role'] == 'author'){ ?> 
-           			<a href="index.php?action=update_post&postId=<?= $data['id']?>"> Modification </a> <?php 
-           		}?>
-            </section>
-			
-		<?php }
 		
-		$posts->closeCursor();	?>
 
 		<div style="text-align: center;"> <?php
 

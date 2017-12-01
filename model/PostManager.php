@@ -21,7 +21,7 @@ class PostManager extends Manager
 	public function getPosts($limit1, $limit2){
 		$db = Manager::dbConnect();
 
-		$posts = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') 
+		$posts = $db->query('SELECT id, chapter, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') 
 								AS creation_date_fr FROM posts ORDER BY chapter LIMIT '.$limit1.','.$limit2.'');
 
 		return $posts;

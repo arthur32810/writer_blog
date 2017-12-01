@@ -1,15 +1,17 @@
+.page {background-image: url("alaska-lg.jpg");}
+
 h1, h3
 {
     text-align:center;
 }
 h3
 {
-    background-color:black;
+   
     color:white;
     font-size:0.9em;
     margin-bottom:0px;
 }
-.news div
+.news p
 {
     background-color:#CCCCCC;
     margin-top:0px;
