@@ -5,10 +5,14 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Histoire 'Billet Simple pour l'Alaska' écrit par Jean Forteroche">
+    <meta name="author" content="Arthur Robert">
 
-    <title>Clean Blog - Start Bootstrap Theme</title>
+    <LINK REL="SHORTCUT ICON" href="public/img/alaska.ico">
+        
+
+    <title> <?= $title?> </title>
+    <?php if(!empty($script)){ echo $script;} ?>
 
     <!-- Bootstrap core CSS -->
     <link href="public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -20,6 +24,8 @@
 
     <!-- Custom styles for this template -->
     <link href="public/css/clean-blog.min.css" rel="stylesheet">
+
+
 
   </head>
 
@@ -81,7 +87,7 @@
     </nav>
 
     <!-- Page Header -->
-    <header class="masthead" style="background-image: url('alaska-lg.jpg')">
+    <header class="masthead " style="background-image: url('public/img/alaska-lg.jpg')">
       <div class="overlay"></div>
       <div class="container">
         <div class="row">
@@ -95,7 +101,13 @@
       </div>
     </header>
 
-    <?= $content ?>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <?= $content ?>
+            </div>
+    </div>  
+</div>
 
     <!-- Footer -->
     <footer>

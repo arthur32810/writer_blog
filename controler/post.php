@@ -29,6 +29,8 @@ function listPosts()
 
 function post()
 {
+    $paging ='';
+
     $postManager = new Arthur\WriterBlog\Model\PostManager();
     $commentManager = new  Arthur\WriterBlog\Model\CommentManager();
 

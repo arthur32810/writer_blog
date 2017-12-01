@@ -2,13 +2,19 @@
 <?php ob_start(); 
 
 	if (!empty($_GET['complete']) && $_GET['complete'] == 'no'){
-				echo "Les informations ne sont pas complétes";
+				?><div class="alert alert-danger" role="alert">
+					Les informations ne sont pas complétes
+				</div> <?php
 			} 
 	elseif (!empty($_GET['user']) && $_GET['user'] == 'exist'){
-			echo "Pseudo déjà utilisé";
+			?><div class="alert alert-danger" role="alert">
+				Pseudo déjà utilisé
+			</div> <?php
 		}
 	elseif (!empty($_GET['add']) && $_GET['add'] == 'no'){
-			echo "Vous n'avez pu été inscrit(e), veuillez réessayer";
+			?><div class="alert alert-danger" role="alert">
+				Vous n'avez pu été inscrit(e), veuillez réessayer
+			</div> <?php
 		}
 ?>
 
@@ -16,17 +22,17 @@
 
 	<form action="index.php?action=addUser" method="post">
 		<div>
-			<label for="pseudo">Pseudo</label>
-			<input type="text" id="pseudo" name="pseudo" required />
+			<label class="col-form-label" for="pseudo">Pseudo</label>
+			<input type="text" class="form-control" id="pseudo" name="pseudo" required />
 		</div>
 
 		<div>
-			<label for="pass">Mot de passe :</label>
-			<input type="text" id="pass" name="pass" required />
-		</div>
+			<label class="col-form-label" for="pass">Mot de passe :</label>
+			<input type="text" class="form-control" id="pass" name="pass" required />
+		</div> <br/>
 
 		<div>
-			<input type="submit" />
+			<input class="btn" type="submit" />
 		</div>
 	</form>
 

@@ -14,8 +14,11 @@ class CommentManager extends Manager
 		$data = $paging->fetch();
 	    $nb_comments = $data['nb_comments']; // retourne le nombre d'entrée
 
-	    $nb_paging_comments = (int) ($nb_comments / 5); // divise par 5; 
-	    $nb_paging_comments++;
+	    if($nb_comments == 0){ $nb_paging_comments = $nb_comments;}
+	    elseif($nb_comments >=1){
+	    	$nb_paging_comments = (int) ($nb_comments / 5); // divise par 5; 
+	    	$nb_paging_comments++;
+	    }
 
 	    return $nb_paging_comments;
 	}

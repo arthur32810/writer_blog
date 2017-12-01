@@ -12,8 +12,11 @@ class PostManager extends Manager
 		$data = $paging->fetch();
 	    $nb_posts = $data['nb_posts']; // retourne le nombre d'entrée
 
-	    $nb_paging = (int) ($nb_posts / 5); // divise par 5; 
-	    $nb_paging++;
+	    if($nb_posts == 0){ $nb_paging = $nb_posts;}
+	    elseif($nb_posts >=1){
+	    	 $nb_paging = (int) ($nb_posts / 5); // divise par 5; 
+	    	$nb_paging++;
+	    }   
 
 	    return $nb_paging;
 	}

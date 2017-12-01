@@ -1,42 +1,65 @@
 <?php
 		if (!empty($_GET['complete']) && $_GET['complete'] == 'no'){
-		echo "Tous les champs non pas été rempli";
+			?><div class="alert alert-danger" role="alert">
+				Tous les champs non pas été rempli
+			</div> <?php
 	}
 	elseif (!empty($_GET['update']) && $_GET['update'] == 'yes'){
-				echo "Le Chapitre à été modifié";
+			?> <div class="alert alert-success" role="alert">
+			  Le Chapitre à été modifié
+			</div> <?php
 		}
 	elseif (!empty($_GET['addComment']) &&$_GET['addComment'] == 'no'){
-			echo "Le commentaire n'a pas pu être ajouté";
+		?><div class="alert alert-danger" role="alert">
+				Le commentaire n'a pas pu être ajouté
+			</div> <?php
 		}
 	elseif (!empty($_GET['addComment']) &&$_GET['addComment'] == 'yes'){
-			echo "Le commentaire a été ajouté";
+			?> <div class="alert alert-success" role="alert">
+			 Le commentaire a été ajouté
+			</div> <?php
 		}
 	elseif (!empty($_GET['idComment']) && $_GET['idComment'] == 'no'){
-			echo "L'id du commentaire n'existe pas";
+		?><div class="alert alert-danger" role="alert">
+				L'id du commentaire n'existe pas
+			</div> <?php
 		}
 
 	elseif (!empty($_GET['updateComment'])){
 		if($_GET['updateComment'] == 'no'){
-			echo "Le Commentaire n'a pas pu être  modifié";
+			?><div class="alert alert-danger" role="alert">
+				Le Commentaire n'a pas pu être  modifié
+			</div> <?php
 		}
 		elseif($_GET['updateComment'] == 'yes'){
-			echo "Le Commentaire a été modifié";
+			?> <div class="alert alert-success" role="alert">
+			  Le Commentaire a été modifié
+			</div> <?php
 		}	
 	}
 	
 	elseif (!empty($_GET['deleteComment'])){
 		if($_GET['deleteComment'] == 'no'){
-			echo "Le Commentaire n'a pas pu être supprimé";
+			?><div class="alert alert-danger" role="alert">
+				Le Commentaire n'a pas pu être supprimé
+			</div> <?php
 		}
 		elseif($_GET['deleteComment'] == 'yes'){
-			echo "Le Commentaire a été supprimé";
+			?> <div class="alert alert-success" role="alert">
+			 Le Commentaire a été supprimé
+			</div> <?php
 		}	
 	}
 	elseif(!empty($_GET['addModeration'])){
 			if($_GET['addModeration'] == 'yes'){
-				echo "Le commentaire a bien été signalé";
+				?> <div class="alert alert-success" role="alert">
+					Le commentaire a bien été signalé
+				</div> <?php
 			}
+			
 			elseif($_GET['delete'] == 'no'){
-				echo "Le commentaire n'a pas pu être signalé";
+				?><div class="alert alert-danger" role="alert">
+					Le commentaire n'a pas pu être signalé
+				</div> <?php
 			}
 		}

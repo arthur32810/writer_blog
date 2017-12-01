@@ -2,16 +2,24 @@
 <?php ob_start(); 
 
 	if (!empty($_GET['complete']) && $_GET['complete'] == 'no'){
-				echo "Les informations ne sont pas complétes";
+				?><div class="alert alert-danger" role="alert">
+					Les informations ne sont pas complétes
+				</div> <?php
 			} 
 	elseif (!empty($_GET['add']) && $_GET['add'] == 'no'){
-			echo "Votre profil n'a pas pu être mis à jour";
+				?><div class="alert alert-danger" role="alert">
+					Votre profil n'a pas pu être mis à jour
+				</div> <?php
 		}
 	elseif (!empty($_GET['deleteUser']) && $_GET['deleteUser'] == 'no'){
-			echo "Votre profil n'a pas pu être supprimé";
+				?><div class="alert alert-danger" role="alert">
+					Votre profil n'a pas pu être supprimé
+				</div> <?php
 		}
 	elseif (!empty($_GET['pseudo']) && $_GET['pseudo'] == 'exist'){
-		echo "Le pseudo choisi existe déjà";
+			?><div class="alert alert-danger" role="alert">
+					Le pseudo choisi existe déjà
+				</div> <?php
 	}
 ?>
 
@@ -21,7 +29,7 @@
 
 			<form action="index.php?action=updateUser&require_admin=ok" method="post">
 				<div>
-					<label for="pseudo">Pseudo</label>
+					<label class="col-form-label" for="pseudo">Pseudo</label>
 					<input type="text" id="pseudo" name="pseudoSearch" required />
 				</div> <br>
 				<div>
@@ -34,23 +42,23 @@
 ?>
 	<form action="index.php?action=updateUser&require=ok" method="post">
 		<div>
-			<label for="pseudo">Pseudo</label>
-			<input type="text" id="pseudo" name="pseudo" value="<?= $pseudo?> " required />
+			<label class="col-form-label" for="pseudo">Pseudo</label>
+			<input type="text" class="form-control" id="pseudo" name="pseudo" value="<?= $pseudo?> " required />
 		</div>
 
 		<div>
-			<label for="pass">Mot de passe Actuel :</label>
-			<input type="password" id="pass" name="pass" value="<?= $pass ?>" required/>
+			<label class="col-form-label" for="pass">Mot de passe Actuel :</label>
+			<input type="password" class="form-control" id="pass" name="pass" value="<?= $pass ?>" required/>
 		</div>
 
 		<div>
-			<label for="newPass">Nouveau mot de passe :</label>
-			<input type="password" id="newPass" name="new_pass" />
+			<label class="col-form-label" for="newPass">Nouveau mot de passe :</label>
+			<input type="password" class="form-control" id="newPass" name="new_pass" />
 		</div>
 
 		<div>
-			<label for="confirmNewPass">Confirmer le nouveau mot de passe :</label>
-			<input type="password" id="confirmNewPass" name="confirmNewPass" />
+			<label class="col-form-label" for="confirmNewPass">Confirmer le nouveau mot de passe :</label>
+			<input type="password" class="form-control" id="confirmNewPass" name="confirmNewPass" />
 		</div>
 <?php
 		if($_SESSION['role'] == 'admin'){ ?>
@@ -65,11 +73,11 @@
 			</div>
 	<?php } ?>
 
-		<input hidden name="id" value="<?= $user['id']?>" />
+		<input hidden name="id" value="<?= $user['id']?>" /> <br/>
 
 		<div>
-			<input type="submit" value="Modifier mon compte utilisateur" name="update" />
-			<input type="submit" value="Supprimer mon compte utilisateur" name="delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre profil, vous ne pourrez plus modifier vos commentaires !')" />
+			<input class="btn" type="submit" value="Modifier mon compte utilisateur" name="update" />
+			<input class="btn" type="submit" value="Supprimer mon compte utilisateur" name="delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre profil, vous ne pourrez plus modifier vos commentaires !')" />
 		</div>
 	</form>
 <?php } ?>
