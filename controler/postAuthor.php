@@ -10,14 +10,19 @@ function writePost()
 function createPost(){
     $postManager = new Arthur\WriterBlog\Model\PostManager();
 
-    $post = $postManager->getPost('',$_POST['chapter']);
+    $chapter = htmlspecialchars($_POST['chapter']);
+
+    $post = $postManager->getPost('',$chapter);
 
     if(!empty($post)){
     	header('Location: index.php?action=update_post&postId='.$post['id'].'&chapter=exist');
     }
     else{
 
-	    $createPost = $postManager->createPost($_POST['chapter'], $_POST['title'], $_POST['content']);
+    	$title = htmlspecialchars($_POST['title']);
+    	$content = htmlspecialchars($_POST['content']);
+
+	    $createPost = $postManager->createPost($chapter, $title, $content);
 
 	     if ($createPost === false) {
 	        header('Location: index.php?action=write_post&create=no');
@@ -31,7 +36,9 @@ function createPost(){
 function updateWrite(){
 	$postManager = new Arthur\WriterBlog\Model\PostManager();
 
-	$post = $postManager->getPost($_GET['postId'],'');
+	$postId = htmlspecialchars($_GET['postId']);
+
+	$post = $postManager->getPost($postId,'');
 
 	require('view/backend/updatePost.php');
 }
@@ -39,10 +46,16 @@ function updateWrite(){
 function updatePost(){
 	$postManager = new Arthur\WriterBlog\Model\PostManager();
 
-	$existPost = $postManager->getPost($_GET['id'],'');
+	$id = htmlspecialchars($_GET['id']);
+
+	$existPost = $postManager->getPost($id,'');
 
 	if(!empty($existPost)){ 
-		$updatePost = $postManager->updatePost($_GET['id'], $_POST['chapter'], $_POST['title'], $_POST['content']);
+		$chapter = htmlspecialchars($_POST['chapter']);
+		$title = htmlspecialchars($_POST['title']);
+    	$content = htmlspecialchars($_POST['content']);
+
+		$updatePost = $postManager->updatePost($id, $chapter, $title, $content);
 
 		if ($updatePost === false) {
 		    header('Location: index.php?action=listPosts&update=no');
@@ -58,17 +71,25 @@ function updatePost(){
 
 function deletePost(){
 	$postManager = new Arthur\WriterBlog\Model\PostManager();
+	$commentManager = new  Arthur\WriterBlog\Model\CommentManager();
 
-	$existpost = $postManager->getPost($_GET['id'],'');
+	$id = htmlspecialchars($_GET['id']);
+
+	$existpost = $postManager->getPost($id,'');
 
 	if(!empty($existpost)){ 
-		$deletePost = $postManager->deletePost($_GET['id']);
+		$deletePost = $postManager->deletePost($id);
 
 		if ($deletePost === false) {
 		    header('Location: index.php?action=listPosts&delete=no');
 		}
 		else {
-		    header('Location: index.php?action=listPosts&delete=yes');
+			$deleteComment = $commentManager->deleteCommentChapter($id);
+		    
+		    if ($deleteComment === false) {
+		    	header('Location: index.php?action=listPosts&delete=no');
+			}
+			else{header('Location: index.php?action=listPosts&delete=yes');}
 		}
 	}
 	else{echo "L'id n'existe pas ! ";}

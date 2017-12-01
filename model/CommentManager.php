@@ -72,4 +72,13 @@ class CommentManager extends Manager
 
 		return $deleteComment;
 	}
+
+	public function deleteCommentChapter($id){
+		$db = Manager::dbConnect();
+
+		$deleteComment = $db->prepare('DELETE FROM comments WHERE post_id=?');
+		$deleteComment->execute(array($id));
+
+		return $deleteComment;
+	}
 }

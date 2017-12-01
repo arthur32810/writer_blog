@@ -13,10 +13,10 @@
 		}
 		elseif(!empty($_GET['delete'])){
 			if($_GET['delete'] == 'yes'){
-				echo "Le Chapitre à été supprimé";
+				echo "Le Chapitre et les commentaires associé ont été supprimé";
 			}
 			elseif($_GET['delete'] == 'no'){
-				echo "Le chapitre n'a pas pu être supprimé";
+				echo "Le chapitre ou les commentaires associé n'ont pas pu être supprimé";
 			}
 		}
 
