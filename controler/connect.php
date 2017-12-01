@@ -110,14 +110,21 @@ function updateUser(){
 			}
 			else{$role = $user['role']; }
 
-			$updateUser = $userManager->updateUser($_POST['id'], $pseudo, $mdp_crypt, $role);
+			$existUser = $userManager->getUser($pseudo);
 
-			if ($updateUser === false) {
-			    header('Location: index.php?action=updateUser&add=no');
+			if(empty($existUser)){
+				$updateUser = $userManager->updateUser(htmlspecialchars($_POST['id']), $pseudo, $mdp_crypt, $role);
+
+				if ($updateUser === false) {
+				    header('Location: index.php?action=updateUser&add=no');
+				}
+				else {
+				    header('Location: index.php?action=listPosts&updateUser=yes');
+				}
 			}
-			else {
-			    header('Location: index.php?action=listPosts&updateUser=yes');
-			}
+			else { header('Location: index.php?action=updateUser&pseudo=exist');}
+
+			
 
 		}
 		else{header('Location: index.php?action=updateUser&complete=no');}

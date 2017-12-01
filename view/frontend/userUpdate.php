@@ -10,6 +10,9 @@
 	elseif (!empty($_GET['deleteUser']) && $_GET['deleteUser'] == 'no'){
 			echo "Votre profil n'a pas pu être supprimé";
 		}
+	elseif (!empty($_GET['pseudo']) && $_GET['pseudo'] == 'exist'){
+		echo "Le pseudo choisi existe déjà";
+	}
 ?>
 
 <h1> Modification de votre profil utilisateur </h1>

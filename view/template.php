@@ -9,6 +9,9 @@
     </head>
         
     <body>
-        <?= $content ?>
+
+        <section class="col-xs-offset-2 col-xs-8 col-xs-offset-2">
+            <?= $content ?>
+        </section>
     </body>
 </html>
