@@ -7,6 +7,7 @@ function inscription(){
 }
 
 function addUser(){
+
 	$userManager = new Arthur\WriterBlog\Model\UserManager();
 
 	$user = $userManager->getUser($_POST['pseudo']);
