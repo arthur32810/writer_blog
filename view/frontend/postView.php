@@ -43,9 +43,11 @@
 			</form>
 	<?php	}
 		
+		$i =  0;
+
 		while($comment = $comments->fetch())
-		{ ?> 
-	
+		{ $i++; ?> 
+			
 			<div>
 				<p> <strong> <?= htmlspecialchars($comment['author'])?> </strong>
 					<em> le <?= $comment['comment_date_fr'] ?> </em>
@@ -55,8 +57,8 @@
 				<?php 
 					if(!empty($_SESSION['pseudo']) && $comment['user_id'] != $_SESSION['id']){?> 
 						<p> 
-							<button type="button" data-toggle="modal" data-target="#signaler" class="btn btn-primary">Signaler</button>
-							<div class="modal fade" id="signaler" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<button type="button" data-toggle="modal" data-target="#signaler<?=$i?>" class="btn btn-primary">Signaler</button>
+							<div class="modal fade" id="signaler<?=$i?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 							  <div class="modal-dialog" role="document">
 							    <div class="modal-content">
 							      <div class="modal-header">
@@ -88,8 +90,8 @@
 										<button class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre commentaire ')"> Supprimé </button>
 									</form>
 
-									<button class="btn btn-primary" onclick="bascule('update'); return false;"> Modifier </button>
-									<div id='update' style='display:none;'> <br/>
+									<button class="btn btn-primary" onclick="bascule('update<?=$i?>'); return false;"> Modifier </button>
+									<div id='update<?=$i?>' style='display:none;'> <br/>
 										<form action="index.php?action=updateComment&amp;id=<?= $post['id'] ?>&idComment=<?= $comment['id']?>" method="post">
 											<div>
 												<textarea id="comment" name="comment" required> <?= $comment['comment']?></textarea>

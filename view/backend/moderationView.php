@@ -44,9 +44,11 @@ $script='<script language="javascript" type="text/javascript">
 	<h1> Page de Modération </h1> 
 
 	<?php		
-	
+		$i=0;
+
 		while($moderation = $moderations->fetch())
-		{ $post = $postManager->getPost($moderation['post_id'],'');?> <br/>
+		{ $i++;
+		 $post = $postManager->getPost($moderation['post_id'],'');?> <br/>
 			<h4> <a href="index.php?action=post&id=<?= $post['id']?>"> Chapitre n°<?=$post['chapter']?> : <?= $post['title']?> </a></h4> 
 
 		<?php $comment = $commentManager->getComment($moderation['id_comment']); ?>
@@ -63,9 +65,9 @@ $script='<script language="javascript" type="text/javascript">
 					<button class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre commentaire ')"> Supprimé </button>
 				</form>
 
-				<a class="btn btn-primary" style="display: inline;" onclick="bascule('update'); return false;"> Modifier le commentaire </a>
-				<div id='update' style='display:none;'> 
-					<form action="index.php?action=updateModeration&amp;id=<?= $post['id'] ?>&idComment=<?= $comment['id']?>&idModeration=<?= $moderation['id']?>" method="post">
+				<a class="btn btn-primary" style="display: inline; color:white" onclick="bascule('update<?=$i?>'); return false;"> Modifier </a>
+				<div id='update<?=$i?>' style='display:none;'> 
+					<form action="index.php?action=updateModeration&amp;id=<?= $post['id'] ?>&idComment=<?= $comment['id']?>&idModeration=<?= $moderation['id']?>" method="post"> <br/>
 						<div>
 							<label for="comment"> Modifier votre Commentaire</label><br />
 							<textarea class="form-control" id="comment" name="comment" required> <?= $comment['comment']?></textarea>
