@@ -74,4 +74,13 @@ class PostManager extends Manager
 
 		return $deletePost;
 	}
+
+	public function deletePostModeration($id){
+		$db = Manager::dbConnect();
+
+		$deletePostModeration = $db->prepare('DELETE FROM moderation WHERE post_id = ?');
+		$deletePostModeration->execute(array($id));
+
+		return $deletePostModeration;
+	}
 }

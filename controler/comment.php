@@ -67,7 +67,8 @@ function deleteComment(){
 
         if(!empty($existComment)){
             $deleteComment = $commentManager->deleteComment($idComment);
-             if ($deleteComment === false) {
+            $deleteCommentModeration = $commentManager ->deleteCommentModeration($idComment);
+            if ($deleteComment === false) {
                 header('Location: index.php?action=post&id='.$idPost.'&deleteComment=no');
             }
             else {

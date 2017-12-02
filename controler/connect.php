@@ -48,14 +48,6 @@ function connect(){
 
 function connection(){
 
-	// Suppression des variables de session et de la session
-	$_SESSION = array();
-	session_destroy();
-
-	// Suppression des cookies de connexion automatique
-	setcookie('login', '');
-	setcookie('pass_hache', '');
-
 	$userManager = new Arthur\WriterBlog\Model\UserManager();
 
 	$pseudo= htmlspecialchars(strip_tags($_POST['pseudo'])); 
@@ -79,9 +71,7 @@ function connection(){
 		
 		header('Location: index.php');		
 	}
-	else{
-		echo "Mauvais identifiant ou mot de passe";
-		}
+	else{ header('Location: index.php?action=connect&good=no');		}
 }
 
 function updateUser(){
@@ -94,46 +84,50 @@ function updateUser(){
 
 	$user = $userManager->getUser($pseudo);
 
-	if(!empty($_GET['require']) == 'ok' ){
-		if(!empty($_POST['pseudo']) && !empty($_POST['pass'])){
-			if(!empty($_POST['newPass']) && !empty($_POST['confirmNewPass']) && $_POST['newPass']==$_POST['confirmNewPass']) {
-				$pass = htmlspecialchars($_POST['newPass']);
-			}
-			
-			$pseudo= htmlspecialchars(strip_tags($_POST['pseudo'])); 			
-			$pass= htmlspecialchars(strip_tags($_POST['pass']));
+	if(!empty($user)){
 
-			$mdp_crypt = $userManager->Cryptage($pass);
-
-			if($_SESSION['role'] == 'admin'){
-				$role = $_POST['role'];
-			}
-			else{$role = $user['role']; }
-
-			$existUser = $userManager->getUser($pseudo);
-
-			if(empty($existUser)){
-				$updateUser = $userManager->updateUser(htmlspecialchars($_POST['id']), $pseudo, $mdp_crypt, $role);
-
-				if ($updateUser === false) {
-				    header('Location: index.php?action=updateUser&add=no');
+		if(!empty($_GET['require']) == 'ok' ){
+			if(!empty($_POST['pseudo']) && !empty($_POST['pass'])){
+				if(!empty($_POST['newPass']) && !empty($_POST['confirmNewPass']) && $_POST['newPass']==$_POST['confirmNewPass']) {
+					$pass = htmlspecialchars($_POST['newPass']);
 				}
-				else {
-				    header('Location: index.php?action=listPosts&updateUser=yes');
+				
+				$pseudo= htmlspecialchars(strip_tags($_POST['pseudo'])); 			
+				$pass= htmlspecialchars(strip_tags($_POST['pass']));
+
+				$mdp_crypt = $userManager->Cryptage($pass);
+
+				if($_SESSION['role'] == 'admin'){
+					$role = $_POST['role'];
 				}
+				else{$role = $user['role']; }
+
+				$existUser = $userManager->getUser($pseudo);
+
+				if(empty($existUser)){
+					$updateUser = $userManager->updateUser(htmlspecialchars($_POST['id']), $pseudo, $mdp_crypt, $role);
+
+					if ($updateUser === false) {
+					    header('Location: index.php?action=updateUser&add=no');
+					}
+					else {
+					    header('Location: index.php?action=listPosts&updateUser=yes');
+					}
+				}
+				else { header('Location: index.php?action=updateUser&pseudo=exist');}
+
+				
+
 			}
-			else { header('Location: index.php?action=updateUser&pseudo=exist');}
-
-			
-
+			else{header('Location: index.php?action=updateUser&complete=no');}
 		}
-		else{header('Location: index.php?action=updateUser&complete=no');}
+		else{
+			$pseudo = $user['pseudo'];
+			$pass = $userManager->Cryptage($user['password']);
+			require('view/frontend/userUpdate.php');
+		}
 	}
-	else{
-		$pseudo = $user['pseudo'];
-		$pass = $userManager->Cryptage($user['password']);
-		require('view/frontend/userUpdate.php');
-	}
+	else{header('Location: index.php?action=updateUser&pseudo=no-exist'); }
 }
 
 function deleteUser(){

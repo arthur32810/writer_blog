@@ -48,20 +48,20 @@
 	
 			<div>
 				<p> <strong> <?= htmlspecialchars($comment['author'])?> </strong>
-					le <?= $comment['comment_date_fr'] ?>
+					<em> le <?= $comment['comment_date_fr'] ?> </em>
 				</p>					
 				<p> <?= htmlspecialchars($comment['comment']) ?> </p>
 
 				<?php 
 					if(!empty($_SESSION['pseudo']) && $comment['user_id'] != $_SESSION['id']){?> 
 						<p> 
-							<button data-toggle="modal" href="#signaler" class="btn btn-primary">Signaler</button>
-							<div class="modal fade" id="signaler">
-							  <div class="modal-dialog">
+							<button type="button" data-toggle="modal" data-target="#signaler" class="btn btn-primary">Signaler</button>
+							<div class="modal fade" id="signaler" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							  <div class="modal-dialog" role="document">
 							    <div class="modal-content">
 							      <div class="modal-header">
-							        <button type="button" class="close" data-dismiss="modal">x</button>
 							        <h4 class="modal-title">Signaler ce commentaire</h4>
+							        <button type="button" class="close" data-dismiss="modal">x</button>
 							      </div>
 							      <div class="modal-body">
 							       	<form method="post" action="index.php?action=addModeration&postId=<?= $post['id'] ?>&commentId=<?= $comment['id']?>">

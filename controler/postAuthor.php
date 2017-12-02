@@ -20,7 +20,7 @@ function createPost(){
     else{
 
     	$title = htmlspecialchars($_POST['title']);
-    	$content = htmlspecialchars($_POST['content']);
+    	$content = $_POST['content'];
 
 	    $createPost = $postManager->createPost($chapter, $title, $content);
 
@@ -85,6 +85,7 @@ function deletePost(){
 		}
 		else {
 			$deleteComment = $commentManager->deleteCommentChapter($id);
+			$deletePostModeration = $postManager->deletePostModeration($id);
 		    
 		    if ($deleteComment === false) {
 		    	header('Location: index.php?action=listPosts&delete=no');

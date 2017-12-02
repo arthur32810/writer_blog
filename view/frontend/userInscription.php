@@ -28,7 +28,7 @@
 
 		<div>
 			<label class="col-form-label" for="pass">Mot de passe :</label>
-			<input type="text" class="form-control" id="pass" name="pass" required />
+			<input type="password" class="form-control" id="pass" name="pass" required />
 		</div> <br/>
 
 		<div>

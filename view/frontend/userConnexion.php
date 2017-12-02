@@ -3,14 +3,20 @@
 
 	if (!empty($_GET['add']) && $_GET['add'] == 'yes'){
 		?> <div class="alert alert-success" role="alert">
-			  Vous avez bien été inscrit(e)
-			</div> <?php
+		 	Vous avez bien été inscrit(e)
+		</div> <?php
 		}
 	elseif (!empty($_GET['complete']) && $_GET['complete'] == 'no'){
-			?><div class="alert alert-danger" role="alert">
-				pseudo ou mot de passe non présent
-			</div> <?php
+		?><div class="alert alert-danger" role="alert">
+			pseudo ou mot de passe non présent
+		</div> <?php
 		}
+
+	elseif (!empty($_GET['good']) && $_GET['good'] == 'no'){
+		?><div class="alert alert-danger" role="alert">
+			Mauvais identifiant ou mot de passe
+		</div> <?php
+	}
 ?>
 
 <h1> Connexion à votre compte </h1>

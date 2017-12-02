@@ -84,4 +84,13 @@ class CommentManager extends Manager
 
 		return $deleteComment;
 	}
+
+	public function deleteCommentModeration($id){
+		$db = Manager::dbConnect();
+
+		$deleteCommentModeration = $db->prepare('DELETE FROM moderation WHERE id_comment = ?');
+		$deleteCommentModeration->execute(array($id));
+
+		return $deleteCommentModeration;
+	}
 }

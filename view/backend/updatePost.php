@@ -4,10 +4,14 @@
 
 <?php ob_start();
 		if (!empty($_GET['complete']) && $_GET['complete'] == 'no'){
-				echo "Les informations ne sont pas complétes";
+				?><div class="alert alert-danger" role="alert">
+					Les informations ne sont pas complétes
+				</div> <?php
 			}
 		elseif(!empty($_GET['chapter']) && $_GET['chapter'] == 'exist'){
-				echo "Le chapitre existe déjà !";
+				?><div class="alert alert-danger" role="alert">
+					Le chapitre existe déjà !
+				</div> <?php
 		}
 		else{}
 ?>
@@ -15,27 +19,28 @@
 		
 		
 	
-	<h1> Modification du chapitre <?= $post['chapter'] ?> : <?= $post['title']?>  </h1>
+	<h1> Modification du chapitre <?= $post['chapter'] ?> : <h1> 
+	<h3 class="text-center">   <?= $post['title']?>  </h3> <br/>
 
 	<form action="index.php?action=update_post&id=<?= $post['id']?>" method="post">
 		<div>
-			<label for="title">Titre</label>
-			<input type="text" id="title" name="title" value="<?= $post['title']?>" required /> <br/>
+			<label class="col-form-label" for="title">Titre</label>
+			<input class="form-control" type="text" id="title" name="title" value="<?= $post['title']?>" required /> <br/>
 		</div> <br/>
 
 		<div>
-			<label for="chapter">Chapitre n°</label>
-			<input type="number" id="chapter" name="chapter" value="<?= $post['chapter']?>" required />
+			<label class="col-form-label" for="chapter">Chapitre n°</label>
+			<input class="form-control" type="number" id="chapter" name="chapter" value="<?= $post['chapter']?>" required />
 		</div> <br/>
 
 		<div>
-			<label for="content">Texte</label><br />
-			<textarea id="content" name="content" required > <?= $post['content']?></textarea>
+			<label class="col-form-label" for="content">Texte</label><br />
+			<textarea class="form-control" id="content" name="content" required > <?= $post['content']?></textarea>
 		</div> <br/>
 
 		<div>
-			<input type="submit" value="Modifier" name="update" onclick="return confirm('Êtes-vous sûr de vouloir modifer ce chapitre ?')"/>
-			<input type="submit" value="Supprimer" name="delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce chapitre ?')"/>
+			<input class="btn btn-primary" type="submit" value="Modifier" name="update" onclick="return confirm('Êtes-vous sûr de vouloir modifer ce chapitre ?')"/>
+			<input class="btn btn-danger" type="submit" value="Supprimer" name="delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce chapitre ?')"/>
 			
 		</div>
 	</form>

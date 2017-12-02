@@ -5,13 +5,19 @@
 <?php ob_start();
 		
 		if (!empty($_GET['create']) && $_GET['create'] == 'no'){
-				echo "Le chapitre n'a pas pu être ajouté";
+			?><div class="alert alert-danger" role="alert">
+				Le chapitre n'a pas pu être ajouté
+			</div> <?php
 			}
 		elseif(!empty($_GET['chapter']) && $_GET['chapter'] == 'exist'){
-				echo "Le chapitre existe déjà !";
+				?> <div class="alert alert-success" role="alert">
+				 	Le chapitre existe déjà !
+				</div> <?php
 		}
 		elseif (!empty($_GET['complete']) && $_GET['complete'] == 'no'){
-				echo "Les informations ne sont pas complétes";
+				?><div class="alert alert-danger" role="alert">
+					Les informations ne sont pas complétes
+				</div> <?php
 			}
 		else{}
 			?>
@@ -20,21 +26,21 @@
 
 	<form action="index.php?action=create_post" method="post">
 		<div>
-			<label for="title">Titre</label><br />
-			<input type="text" id="title" name="title" required />
+			<label class="col-form-label" for="title">Titre</label><br />
+			<input class="form-control" type="text" id="title" name="title" required />
 		</div> <br/>
 
 		<div>
-			<label for="chapter">Chapitre n°</label>
-			<input type="number" id="chapter" name="chapter" required />
+			<label class="col-form-label" for="chapter">Chapitre n°</label>
+			<input class="form-control" type="number" id="chapter" name="chapter" required />
 		</div> <br/>
 
 		<div>
-			<label for="content">Texte</label><br />
-			<textarea id="content" name="content"></textarea>
+			<label class="col-form-label" for="content">Texte</label><br />
+			<textarea class="form-control" id="content" name="content"></textarea>
 		</div> <br/>
 		<div>
-			<input type="submit" />
+			<input class="btn" type="submit" />
 		</div>
 	</form>
 

@@ -14,7 +14,7 @@
 	            </h2>
 
 	            <h4 class="post-subtitle">
-	            	 <?= $data['content'] ?>
+	            	 <?php echo substr( $data['content'], 0, 550).'...'; ?>
 	            </h4>
 	        </a>
 	            <p class="post-meta">

@@ -24,8 +24,11 @@ class ModerationManager extends Manager
 		$data = $paging->fetch();
 	    $nb_moderation = $data['nb_moderation']; // retourne le nombre d'entrée
 
-	    $nb_paging = (int) ($nb_moderation / 10); // divise par 10
-	    $nb_paging++;
+	    if($nb_moderation == 0){ $nb_paging = $nb_moderation;}
+	    elseif($nb_moderation >=1){
+	    	$nb_paging = (int) ($nb_moderation / 10); // divise par 10
+	    	$nb_paging++;
+	    }   
 
 	    return $nb_paging;
 	}
@@ -33,7 +36,7 @@ class ModerationManager extends Manager
 	public function getModerations(){
 		$db = Manager::dbConnect();
 
-		$moderations = $db->query('SELECT * FROM moderation');
+		$moderations = $db->query('SELECT * FROM moderation ORDER BY id ');
 
 		return $moderations;
 	}
