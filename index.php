@@ -7,15 +7,17 @@
 	
 	if (isset($_GET['action'])) {
 
+		// Vue chapitre
+
 		if ($_GET['action'] == 'listPosts') {
 			session_start();
-			listPosts();
+			PostEntity::listPosts();
 		}
 
 		elseif ($_GET['action'] == 'post'){
 			session_start();
 			if (isset($_GET['id']) && $_GET['id'] > 0) {
-				post();
+				PostEntity::post();
 			}
 			else {
 				header('Location: index.php?action=listPosts&existPost=no');
@@ -157,4 +159,4 @@
 		}
 	}
 	else { session_start();
-			listPosts(); }
+			PostEntity::listPosts(); }
