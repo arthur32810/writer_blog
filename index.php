@@ -1,5 +1,5 @@
 <?php								
-	require_once('controler/post.php');
+	require_once('controler/postEntity.php');
 	require_once('controler/postAuthor.php');
 	require_once('controler/comment.php');
 	require_once('controler/connect.php');
