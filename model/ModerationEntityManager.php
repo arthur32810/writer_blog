@@ -5,14 +5,14 @@ require_once('model/Manager.php');
 
 class ModerationManager extends Manager
 {
-	public function addModeration($commentId, $postId, $cause){
+	public function addModeration($moderation){
 		$db = Manager::dbConnect();
 
 		$addModeration=$db->prepare('INSERT INTO moderation(id_comment, post_id, cause, moderation_date) VALUES(:id_comment, :postId, :cause, NOW())');
 		$addModeration->execute(array(
-						'id_comment' => $commentId,
-						'postId' => $postId, 
-						'cause' => $cause));
+						'id_comment' => $moderation->getId_comment(),
+						'postId' => $moderation->getPost_Id(), 
+						'cause' => $moderation->getCause()));
 
 		return $addModeration;
 	}

@@ -1,6 +1,4 @@
 <?php
-require_once('controler/listModel.php');
-
 class PostEntity
 {
     protected $id;
@@ -78,7 +76,9 @@ class PostEntity
 
     public static function listPosts()
     {
-        $postManager = new Arthur\WriterBlog\Model\PostManager();
+        require('model/PostEntityManager.php');
+
+        $postManager = new Arthur\WriterBlog\Model\PostEntityManager();
 
         if(!empty($_GET['post_page']) && $_GET['post_page']>0)
         {
@@ -103,10 +103,13 @@ class PostEntity
 
     public static function post()
     {
+        require('model/PostEntityManager.php');
+        require('model/CommentEntityManager.php');
+        
         $paging ='';
 
-        $postManager = new Arthur\WriterBlog\Model\PostManager();
-        $commentManager = new  Arthur\WriterBlog\Model\CommentManager();
+        $postManager = new Arthur\WriterBlog\Model\PostEntityManager();
+        $commentManager = new  Arthur\WriterBlog\Model\CommentEntityManager();
 
         $post = $postManager->getPost(htmlspecialchars($_GET['id']),'');
 

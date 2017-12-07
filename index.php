@@ -1,9 +1,9 @@
 <?php								
 	require_once('controler/postEntity.php');
 	require_once('controler/postAuthor.php');
-	require_once('controler/comment.php');
+	require_once('controler/commentEntity.php');
 	require_once('controler/connect.php');
-	require_once('controler/moderation.php');
+	require_once('controler/moderationEntity.php');
 	
 	if (isset($_GET['action'])) {
 
@@ -28,7 +28,7 @@
 
 		elseif ($_GET['action'] == 'addComment'){
 			session_start();
-			if(!empty($_POST['comment'])){
+			if(isset($_POST['comment']) && !empty($_POST['comment'])){
 				addComment();
 			}
 			else{ header('Location: index.php?action=post&id='.$_GET['id'].'&complete=no'); }

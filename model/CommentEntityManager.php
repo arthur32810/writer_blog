@@ -3,7 +3,7 @@ namespace Arthur\WriterBlog\Model;
 
 require_once('model/Manager.php');
 
-class CommentManager extends Manager
+class CommentEntityManager extends Manager
 {
 	public function pagingComments($postId){
 		$db = Manager::dbConnect();
@@ -47,31 +47,35 @@ class CommentManager extends Manager
 		return $comment;
 	}
 
-	public function addComment($postId, $userId, $author, $comment)
+	public function addComment($comment)
 	{
 		$db = Manager::dbConnect();
 		
 		$comments = $db->prepare('INSERT INTO comments (post_id, user_id, author, comment, comment_date) VALUES (?, ?, ?, ?, NOW())');
-		$affectedLines = $comments->execute(array($postId, $userId, $author, $comment));
+		$affectedLines = $comments->execute(array(
+											$comment->getPost_id(),
+											$comment->getUser_id(),
+											$comment->getAuthor(),
+											$comment->getComment()));
 		
 		return $affectedLines;
 	}
 
-	public function updateComment($id, $comment){
+	public function updateComment($comment){
 		$db = Manager::dbConnect();
 
 		$updateComment = $db->prepare('UPDATE comments SET comment = :comment, update_date=NOW() WHERE id =:id');
-		$updateComment->execute(array('comment'=>$comment,
-										'id' => $id));
+		$updateComment->execute(array('comment'=>$comment->getComment(),
+										'id' => $comment->getId()));
 
 		return $updateComment;
 	}
 
-	public function deleteComment($id){
+	public function deleteComment($comment){
 		$db = Manager::dbConnect();
 
 		$deleteComment = $db->prepare('DELETE FROM comments WHERE id=?');
-		$deleteComment->execute(array($id));
+		$deleteComment->execute(array($comment->getId()));
 
 		return $deleteComment;
 	}
@@ -85,11 +89,11 @@ class CommentManager extends Manager
 		return $deleteComment;
 	}
 
-	public function deleteCommentModeration($id){
+	public function deleteCommentModeration($comment){
 		$db = Manager::dbConnect();
 
 		$deleteCommentModeration = $db->prepare('DELETE FROM moderation WHERE id_comment = ?');
-		$deleteCommentModeration->execute(array($id));
+		$deleteCommentModeration->execute(array($comment->getId()));
 
 		return $deleteCommentModeration;
 	}

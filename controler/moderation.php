@@ -1,7 +1,7 @@
 <?php
 require_once('controler/listModel.php');
 
-function addModeration (){
+/*function addModeration (){
 	$postManager = new Arthur\WriterBlog\Model\PostManager();
 	$commentManager = new  Arthur\WriterBlog\Model\CommentManager();
 	$moderationManager = new Arthur\WriterBlog\Model\ModerationManager();
@@ -26,7 +26,7 @@ function addModeration (){
 	 	 else{header('Location: index.php?action=post&id='.$idPost.'&idComment=no');  }
 }
  else{header('Location: index.php?action=listPosts&existPost=no');}
-}
+}*/
 
 function moderation(){
 	if($_SESSION['role']=='admin' || $_SESSION['role']=='moderator'){

@@ -32,13 +32,13 @@
 	<?php		
 
 		if(!empty($_SESSION['pseudo'])){ ?>
-			<form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post">
+			<form action="" method="post">
 				<div>
 					<label for="comment">Ajouter un Commentaire</label><br />
 					<textarea id="comment" name="comment" required></textarea>
 				</div>
 				<div>
-					<input type="submit" class="btn" />
+					<input type="submit" name="add" class="btn" />
 				</div>
 			</form>
 	<?php	}
@@ -66,13 +66,15 @@
 							        <button type="button" class="close" data-dismiss="modal">x</button>
 							      </div>
 							      <div class="modal-body">
-							       	<form method="post" action="index.php?action=addModeration&postId=<?= $post['id'] ?>&commentId=<?= $comment['id']?>">
+							       	<form method="post" action="">
 									   <p>
 									      <label>Raison du signalement : </label> <br/>
 									      <input type="text" name="cause" required/> <br />
 									   </p>
 
-									   <button type="submit" class="btn"> Signaler </button>
+									   <input hidden name="commentId" value="<?= $comment['id']?>">
+
+									   <button type="submit" name="addModeration" class="btn"> Signaler </button>
 									</form>
 							      </div>
 							      <div class="modal-footer">
@@ -86,18 +88,22 @@
 
 				<p> <?php if (!empty($_SESSION['pseudo'])){
 							if( $comment['user_id'] == $_SESSION['id'] || $_SESSION['role']=='admin'){ ?>
-									<form style="display: inline;" method="POST" action="index.php?action=deleteComment&id=<?= $post['id']?>&idComment=<?= $comment['id']?>">
-										<button class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre commentaire ')"> Supprimé </button>
+									<form style="display: inline;" method="POST" action="">
+										<button class="btn btn-danger" name="delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre commentaire ')"> Supprimé </button>
+										<input hidden name="commentId" value="<?= $comment['id']?>">
 									</form>
 
 									<button class="btn btn-primary" onclick="bascule('update<?=$i?>'); return false;"> Modifier </button>
 									<div id='update<?=$i?>' style='display:none;'> <br/>
-										<form action="index.php?action=updateComment&amp;id=<?= $post['id'] ?>&idComment=<?= $comment['id']?>" method="post">
+										<form action="" method="post">
 											<div>
 												<textarea id="comment" name="comment" required> <?= $comment['comment']?></textarea>
 											</div>
+
+											<input hidden name="commentId" value="<?= $comment['id']?>">
+
 											<div>
-												<input class="btn" type="submit" value="Modifier"/>
+												<input class="btn" name="update" type="submit" value="Modifier"/>
 											</div>
 										</form>
 									</div>												
@@ -119,8 +125,9 @@
 
 		<?php $comments->closeCursor(); ?>
 
-
 <?php $content = ob_get_clean(); ?>
 
-<?php require('view/template.php');?>
+<?php require('view/template.php');
+?>
 
+<?php require('view/verification/comment.php');?>

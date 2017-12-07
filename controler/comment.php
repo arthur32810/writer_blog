@@ -1,20 +1,15 @@
 <?php
 
-require_once('controler/listModel.php');
-
 function addComment()
 {
-    $postManager = new Arthur\WriterBlog\Model\PostManager();
-    $commentManager = new  Arthur\WriterBlog\Model\CommentManager();
-
+    $postManager = new Arthur\WriterBlog\Model\PostEntityManager();
+    $commentManager = new  Arthur\WriterBlog\Model\CommentEntityManager();
     $postId = htmlspecialchars($_GET['id']);
     $post = $postManager->getPost($postId,'');
-
     if(!empty($post)){
         
         $comment = htmlspecialchars($_POST['comment']);
         $addComment = $commentManager->addComment($postId, $_SESSION['id'], $_SESSION['pseudo'], $comment);
-
         if ($addComment === false) {
             header('Location: index.php?action=posts&id='.$_GET['id'].'&addComment=no');
         }
@@ -26,6 +21,9 @@ function addComment()
 }
 
 function updateComment(){
+    require('model/PostEntityManager.php');
+    require('model/CommentEntityManager.php');
+        
     $postManager = new Arthur\WriterBlog\Model\PostManager();
     $commentManager = new  Arthur\WriterBlog\Model\CommentManager();
 
@@ -53,6 +51,9 @@ function updateComment(){
 }
 
 function deleteComment(){
+    require('model/PostEntityManager.php');
+    require('model/CommentEntityManager.php');
+
     $postManager = new Arthur\WriterBlog\Model\PostManager();
     $commentManager = new  Arthur\WriterBlog\Model\CommentManager();
 

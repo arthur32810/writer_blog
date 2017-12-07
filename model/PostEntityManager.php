@@ -3,7 +3,7 @@ namespace Arthur\WriterBlog\Model;
 
 require_once('model/Manager.php');
 
-class PostManager extends Manager
+class PostEntityManager extends Manager
 {
 	public function pagingPosts(){
 		$db = Manager::dbConnect();
@@ -32,13 +32,10 @@ class PostManager extends Manager
 
 	public function getPost($id, $chapter){
 		$db = Manager::dbConnect();
-
 		$req = $db->prepare('SELECT id, chapter, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') 
 								AS creation_date_fr FROM posts WHERE id = ? OR chapter = ?');
 		$req->execute(array($id, $chapter));
-
 		$post = $req->fetch();
-
 		return $post;
 	}
 
