@@ -34,15 +34,15 @@ class CommentEntityManager extends Manager
 		return $comments;
 	}
 
-	public function getComment($id)
+	public function getComment($comment)
 	{
 		$db = Manager::dbConnect();
-		
-		$comment = $db->prepare('SELECT id, user_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin\') 
-										AS comment_date_fr FROM comments WHERE id = ?');
-		$comment->execute(array($id));
 
-		$comment = $comment->fetch();			
+		$getComment = $db->prepare('SELECT id, user_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin\') 
+										AS comment_date_fr FROM comments WHERE id = ?');
+		$getComment->execute(array($comment->getId()));
+
+		$comment = $getComment->fetch();			
 		
 		return $comment;
 	}
@@ -80,15 +80,14 @@ class CommentEntityManager extends Manager
 		return $deleteComment;
 	}
 
-	public function deleteCommentChapter($id){
+	public function deleteCommentChapter($post){
 		$db = Manager::dbConnect();
 
 		$deleteComment = $db->prepare('DELETE FROM comments WHERE post_id=?');
-		$deleteComment->execute(array($id));
+		$deleteComment->execute(array($post->getId()));
 
 		return $deleteComment;
 	}
-
 	public function deleteCommentModeration($comment){
 		$db = Manager::dbConnect();
 

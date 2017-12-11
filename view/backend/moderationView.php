@@ -15,9 +15,14 @@ $script='<script language="javascript" type="text/javascript">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>' ?>
 
 <?php ob_start();
-	if (!empty($_GET['existPost']) &&$_GET['existPost'] == 'no'){
+	if (!empty($_GET['existModeration']) &&$_GET['existModeration'] == 'no'){ 
 		?><div class="alert alert-danger" role="alert">
 				Le billet de modération n'existe pas
+			</div> <?php
+	}
+	if (!empty($_GET['complete']) &&$_GET['complete'] == 'no'){ 
+		?><div class="alert alert-danger" role="alert">
+				Les informations ne sont pas compléte
 			</div> <?php
 	}
 	elseif(!empty($_GET['deleteModeration'])){
@@ -46,12 +51,19 @@ $script='<script language="javascript" type="text/javascript">
 	<?php		
 		$i=0;
 
-		while($moderation = $moderations->fetch())
+		$postEntity = new PostEntity();
+		$commentEntity = new CommentEntity();
+
+		while($moderation = $moderations->fetch())  // Récupération des modérations
 		{ $i++;
-		 $post = $postManager->getPost($moderation['post_id'],'');?> <br/>
+			$postEntity->setId($moderation['post_id']);
+			$post = $postManager->getPost($postEntity);?> <br/>
+			
 			<h4> <a href="index.php?action=post&id=<?= $post['id']?>"> Chapitre n°<?=$post['chapter']?> : <?= $post['title']?> </a></h4> 
 
-		<?php $comment = $commentManager->getComment($moderation['id_comment']); ?>
+			<?php 
+			$commentEntity->setId($moderation['id_comment']);
+			$comment = $commentManager->getComment($commentEntity); ?>
 			<p> <em> Commentaire :</em> <br/>
 				<?= $comment['comment']?>
 			</p>
@@ -61,19 +73,25 @@ $script='<script language="javascript" type="text/javascript">
 			</p>
 
 			<p> 
-				<form style="display: inline; "method="POST" action="index.php?action=deleteModeration&id=<?= $post['id']?>&idComment=<?= $comment['id']?>&idModeration=<?= $moderation['id']?>">
-					<button class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre commentaire ')"> Supprimé </button>
+				<form style="display: inline;" method="POST" action=""> <!--Formulaire de suppression -->
+					<button class="btn btn-danger" name="deleteModeration" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre commentaire ')"> Supprimé </button>
+
+					<input hidden name="commentId" value=" <?= $comment['id'];?>"/>
+					<input hidden name="moderationId" value=" <?= $moderation['id'];?>"/>
 				</form>
 
-				<a class="btn btn-primary" style="display: inline; color:white" onclick="bascule('update<?=$i?>'); return false;"> Modifier </a>
+				<a class="btn btn-primary" style="display: inline; color:white" onclick="bascule('update<?=$i?>'); return false;"> Modifier </a> <!--Formulaire de modification -->
 				<div id='update<?=$i?>' style='display:none;'> 
-					<form action="index.php?action=updateModeration&amp;id=<?= $post['id'] ?>&idComment=<?= $comment['id']?>&idModeration=<?= $moderation['id']?>" method="post"> <br/>
+					<form action="" method="post"> <br/>
 						<div>
-							<label for="comment"> Modifier votre Commentaire</label><br />
-							<textarea class="form-control" id="comment" name="comment" required> <?= $comment['comment']?></textarea>
+							<label for="comment"> Modifier le Commentaire</label><br />
+							<textarea class="form-control" id="comment" name="comment" required> <?= $comment['comment']?> </textarea>
 						</div> <br/>
+
+							<input hidden name="commentId" value=" <?= $comment['id'];?>"/>
+							<input hidden name="moderationId" value=" <?= $moderation['id'];?>"/>
 						<div>
-							<input class="btn" type="submit" value="Modifier"/>
+							<input class="btn" name="updateModeration" type="submit" value="Modifier"/>
 						</div>
 					</form>
 				</div>
@@ -104,5 +122,6 @@ $script='<script language="javascript" type="text/javascript">
 
 <?php $content = ob_get_clean(); ?>
 
-<?php require('view/template.php');?>
+<?php require('view/template.php');
 
+require('view/verification/moderation.php'); ?>

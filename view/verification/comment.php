@@ -32,22 +32,29 @@ if(isset($_POST['add'])){
 elseif(isset($_POST['delete'])){
 		extract($_POST);
 
-		$commentId = $_POST['commentId'];
+		$commentId = htmlspecialchars($_POST['commentId']);
 		$postId = htmlspecialchars($_GET['id']);
 
 		$comment = new CommentEntity();
 		$comment->setId($commentId);
 
-		$commentManager = new Arthur\WriterBlog\Model\CommentEntityManager();
+		$commentManager = new Arthur\WriterBlog\Model\CommentEntityManager(); // Test si commentaire existe
+		$existComment = $commentManager->getComment($comment);
+
 		$deleteComment = $commentManager->deleteComment($comment);
 		$deleteModeration = $commentManager->deleteCommentModeration($comment);
-		
-		if ($deleteComment === false) {
-		 	echo '<meta http-equiv="refresh" content="0;URL=index.php?action=post&id='.$postId.'&deleteComment=no">';
-	    }
-	    else {
-	    	echo '<meta http-equiv="refresh" content="0;URL=index.php?action=post&id='.$postId.'&deleteComment=yes">';
-	    }
+
+		if(!empty($existComment)){
+			if ($deleteComment === false) {
+			 	echo '<meta http-equiv="refresh" content="0;URL=index.php?action=post&id='.$postId.'&deleteComment=no">';
+		    }
+		    else {
+		    	echo '<meta http-equiv="refresh" content="0;URL=index.php?action=post&id='.$postId.'&deleteComment=yes">';
+		    }
+		}
+		else{
+        	echo '<meta http-equiv="refresh" content="0;URL=index.php?action=post&id='.$postId.'&idComment=no">';
+        }
 }
 
 elseif(isset($_POST['update'])){
@@ -55,7 +62,7 @@ elseif(isset($_POST['update'])){
 		if(!empty(trim($_POST['comment']))){
 			extract($_POST);
 
-			$commentId = htmlspecialchars($_POST['commentId']);
+			$commentId = $_POST['commentId'];
 			$comment = htmlspecialchars($_POST['comment']);
 			$postId = htmlspecialchars($_GET['id']);
 
@@ -63,44 +70,25 @@ elseif(isset($_POST['update'])){
 			$setComment->setId($commentId);
 			$setComment->setComment($comment);
 
-			$commentManager = new Arthur\WriterBlog\Model\CommentEntityManager();
-			$updateComment = $commentManager->updateComment($setComment);
+			$commentManager = new Arthur\WriterBlog\Model\CommentEntityManager(); // Test si commentaire existe
+			$existComment = $commentManager->getComment($setComment);
+
+			if(!empty($existComment)){
+				 
+				$updateComment = $commentManager->updateComment($setComment); //Mise à jour du commentaire
+				
+				if ($updateComment === false) {
+					echo '<meta http-equiv="refresh" content="0;URL=index.php?action=post&id='.$postId.'&updateComment=no">';
+			    }
+			    else {
+			    	echo '<meta http-equiv="refresh" content="0;URL=index.php?action=post&id='.$postId.'&updateComment=yes">';
+			    }
 			
-			if ($updateComment === false) {
-				echo '<meta http-equiv="refresh" content="0;URL=index.php?action=post&id='.$postId.'&updateComment=no">';
-		    }
-		    else {
-		    	echo '<meta http-equiv="refresh" content="0;URL=index.php?action=post&id='.$postId.'&updateComment=yes">';
-		    }
+			}
+			else{
+	        	echo '<meta http-equiv="refresh" content="0;URL=index.php?action=post&id='.$postId.'&idComment=no">';
+	        }
+			
 		}
 	}
 }
-
-elseif(isset($_POST['addModeration'])){
-	if(isset($_POST['cause'])){
-		if(!empty(trim($_POST['cause']))){
-			extract($_POST);
-
-			$cause = htmlspecialchars($_POST['cause']);
-			$commentId = htmlspecialchars($_POST['commentId']);
-			$postId = $_GET['id'];
-
-			$moderation = new ModerationEntity();
-			$moderation->setId_comment($commentId);
-			$moderation->setPost_id($postId);
-			$moderation->setCause($cause);
-
-			$moderationManager = new Arthur\WriterBlog\Model\ModerationManager();
-
-			$addModeration = $moderationManager->addModeration($moderation);
-			if ($addModeration === false) {
-				echo '<meta http-equiv="refresh" content="0;URL=index.php?action=post&id='.$postId.'&addModeration=no">';
-	        }
-	        else {
-	        	echo '<meta http-equiv="refresh" content="0;URL=index.php?action=post&id='.$postId.'&addModeration=yes">';
-	        }
-		}
-	}
-}
-
-?>

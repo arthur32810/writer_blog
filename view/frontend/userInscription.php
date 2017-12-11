@@ -20,22 +20,24 @@
 
 <h1> Création d'un compte utilisateur </h1>
 
-	<form action="index.php?action=addUser" method="post">
+	<form action="" method="post">
 		<div>
 			<label class="col-form-label" for="pseudo">Pseudo</label>
 			<input type="text" class="form-control" id="pseudo" name="pseudo" required />
 		</div>
 
 		<div>
-			<label class="col-form-label" for="pass">Mot de passe :</label>
-			<input type="password" class="form-control" id="pass" name="pass" required />
+			<label class="col-form-label" for="password">Mot de passe :</label>
+			<input type="password" class="form-control" id="password" name="password" required />
 		</div> <br/>
 
 		<div>
-			<input class="btn" type="submit" />
+			<input class="btn" name="add" type="submit" />
 		</div>
 	</form>
 
 <?php $content = ob_get_clean(); ?>
 
 <?php require('view/template.php');?>
+
+<?php require('view/verification/user.php');?>

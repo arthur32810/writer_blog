@@ -30,53 +30,53 @@ class PostEntityManager extends Manager
 		return $posts;
 	}
 
-	public function getPost($id, $chapter){
+	public function getPost($post){
 		$db = Manager::dbConnect();
 		$req = $db->prepare('SELECT id, chapter, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') 
 								AS creation_date_fr FROM posts WHERE id = ? OR chapter = ?');
-		$req->execute(array($id, $chapter));
+		$req->execute(array($post->getId(), $post->getChapter()));
 		$post = $req->fetch();
 		return $post;
 	}
 
-	public function createPost($chapter, $title, $content){
+	public function createPost($post){
 		$db = Manager::dbConnect();
 
 		$addPost = $db->prepare('INSERT INTO posts (chapter, title, content, creation_date) VALUES (:chapter, :title, :content, NOW())');
 		$addPost->execute(array(
-						'chapter' => $chapter,
-						'title' => $title,
-						'content' => $content));
+						'chapter' => $post->getChapter(),
+						'title' => $post->getTitle(),
+						'content' => $post->getContent()));
 		return $addPost;
 	}
 
-	public function updatePost($id, $chapter, $title, $content){
+	public function updatePost($post){
 		$db = Manager::dbConnect();
 
 		$updatePost = $db->prepare('UPDATE posts SET chapter = :chapter, title = :title, content = :content, update_date = NOW() WHERE id= :id');
 		$updatePost->execute(array(
-							'chapter' => $chapter,
-							'title' => $title,
-							'content' => $content,
-							'id' => $id));
+							'chapter' => $post->getChapter(),
+							'title' => $post->getTitle(),
+							'content' => $post->getContent(),
+							'id' => $post->getId()));
 
 		return $updatePost;
 	}
 
-	public function deletePost($id){
+	public function deletePost($post){
 		$db = Manager::dbConnect();
 
 		$deletePost = $db->prepare('DELETE FROM posts WHERE id =?');
-		$deletePost->execute(array($id));
+		$deletePost->execute(array($post->getId()));
 
 		return $deletePost;
 	}
 
-	public function deletePostModeration($id){
+	public function deletePostModeration($post){
 		$db = Manager::dbConnect();
 
 		$deletePostModeration = $db->prepare('DELETE FROM moderation WHERE post_id = ?');
-		$deletePostModeration->execute(array($id));
+		$deletePostModeration->execute(array($post->getId()));
 
 		return $deletePostModeration;
 	}

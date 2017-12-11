@@ -22,7 +22,7 @@
 	<h1> Modification du chapitre <?= $post['chapter'] ?> : <h1> 
 	<h3 class="text-center">   <?= $post['title']?>  </h3> <br/>
 
-	<form action="index.php?action=update_post&id=<?= $post['id']?>" method="post">
+	<form action="" method="post">
 		<div>
 			<label class="col-form-label" for="title">Titre</label>
 			<input class="form-control" type="text" id="title" name="title" value="<?= $post['title']?>" required /> <br/>
@@ -38,6 +38,8 @@
 			<textarea class="form-control" id="content" name="content" required > <?= $post['content']?></textarea>
 		</div> <br/>
 
+		
+
 		<div>
 			<input class="btn btn-primary" type="submit" value="Modifier" name="update" onclick="return confirm('Êtes-vous sûr de vouloir modifer ce chapitre ?')"/>
 			<input class="btn btn-danger" type="submit" value="Supprimer" name="delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce chapitre ?')"/>
@@ -48,3 +50,5 @@
 <?php $content = ob_get_clean(); ?>
 
 <?php require('view/template.php');?>
+
+<?php require('view/verification/post.php');?>

@@ -50,4 +50,40 @@ class ModerationEntity
 	    $this->cause = $cause;
 	    return $this;
 	}
+
+	public static function moderation(){
+		require('model/ModerationEntityManager.php');
+		require('model/PostEntityManager.php');
+		require('model/CommentEntityManager.php');
+
+		if($_SESSION['role']=='admin' || $_SESSION['role']=='moderator'){
+			$moderationManager = new Arthur\WriterBlog\Model\ModerationEntityManager();
+			$postManager = new Arthur\WriterBlog\Model\PostEntityManager();
+			$commentManager = new  Arthur\WriterBlog\Model\CommentEntityManager();
+
+			$pagingModeration = $moderationManager->pagingModeration();
+
+			if(!empty($_GET['moderation_page']) && $_GET['moderation_page']>0)
+		    {
+		        $page = htmlspecialchars($_GET['moderation_page']);
+		    }
+		    else {$page = 1;}
+
+		    if($page>0){
+		        $limit1 = ($page-1)*10;
+		        $limit2 = $page*10;
+		    }
+		    else{
+		        $limit1 = 0;
+		        $limit2 = 10;
+		    }
+
+		    $moderations = $moderationManager->getModerations($limit1, $limit2);
+		    $pagingModeration = $moderationManager->pagingModeration();
+
+
+		    require('view/backend/moderationView.php');
+		}
+		else{header('Location: index.php?action=listPosts&right=no');}
+	}
 }

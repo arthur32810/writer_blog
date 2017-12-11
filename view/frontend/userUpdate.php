@@ -31,56 +31,56 @@
 
 <h1> Modification de votre profil utilisateur </h1>
 
-<?php 	if($_SESSION['role'] == 'admin' && !isset($_GET['require_admin'])){ ?>
+<?php 	if($_SESSION['role'] == 'admin' && !isset($_GET['require_admin'])){ ?>  <!-- Recherche d'un utilisateur en mode Admin -->
 
-			<form action="index.php?action=updateUser&require_admin=ok" method="post">
+			<form action="" method="post">
 				<div>
 					<label class="col-form-label" for="pseudo">Pseudo</label>
 					<input class="form-control" type="text" id="pseudo" name="pseudoSearch" required />
 				</div> <br>
 				<div>
-					<input class="btn btn-primary" type="submit" value="Modifier mon compte utilisateur" />
+					<input class="btn btn-primary" name="search" type="submit" value="Modifier mon compte utilisateur" />
 				</div>
 			</form> <br>
 		<?php }
+		require('view/verification/user.php');
 
-	if(isset($_GET['require_admin']) || $_SESSION['role']!='admin'){
+	if((isset($search) && $search == 'ok' ) || $_SESSION['role']!='admin'){
 ?>
-	<form action="index.php?action=updateUser&require=ok" method="post">
+	<form action="" method="post">
 		<div>
 			<label class="col-form-label" for="pseudo">Pseudo* </label>
-			<input type="text" class="form-control" id="pseudo" name="pseudo" value="<?= $pseudo?> " required />
+			<input type="text" class="form-control" id="pseudo" name="pseudo" value="<?php echo $user->getPseudo(); ?> " required />
 		</div>
 
 		<div>
-			<label class="col-form-label" for="pass">Mot de passe Actuel* </label>
-			<input type="password" class="form-control" id="pass" name="pass" value="<?= $pass ?>" required/>
+			<label class="col-form-label" for="password">Mot de passe Actuel* </label>
+			<input type="password" class="form-control" id="password" name="password" value="<?php echo $user->getPassword(); ?>" required/>
 		</div>
 
 		<div>
-			<label class="col-form-label" for="newPass">Nouveau mot de passe </label>
-			<input type="password" class="form-control" id="newPass" name="new_pass" />
+			<label class="col-form-label" for="newPassword">Nouveau mot de passe </label>
+			<input type="password" class="form-control" id="newPassword" name="new_password" />
 		</div>
 
 		<div>
-			<label class="col-form-label" for="confirmNewPass">Confirmer le nouveau mot de passe </label>
-			<input type="password" class="form-control" id="confirmNewPass" name="confirmNewPass" />
+			<label class="col-form-label" for="confirmNewPassword">Confirmer le nouveau mot de passe </label>
+			<input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword" />
 		</div> 
 <?php
-		if($_SESSION['role'] == 'admin'){ ?>
+		if($_SESSION['role'] == 'admin'){ ?> <!--Modification d'un rôle -->
 			<br/>
 			<div>
 				<label for="role">Role de l'utilisateur </label>
 			       	<select class="form-control" name="role" id="role" required >
-			       		<option value="view" <?php if($user['role'] == 'view') {?> selected <?php } ?> >Lecteur</option>
-			            <option value="admin" <?php if($user['role'] == 'admin') {?> selected <?php } ?> >Administrateur</option>
-			            <option value="author" <?php if($user['role'] == 'author') {?> selected <?php } ?> >Auteur</option>
-			            <option value="moderator" <?php if($user['role'] == 'moderator') {?> selected <?php } ?>> Moderateur </option>
+			       		<option value="view" <?php if($existUser['role'] == 'view') {?> selected <?php } ?> >Lecteur</option>
+			            <option value="admin" <?php if($existUser['role'] == 'admin') {?> selected <?php } ?> >Administrateur</option>
+			            <option value="author" <?php if($existUser['role'] == 'author') {?> selected <?php } ?> >Auteur</option>
+			            <option value="moderator" <?php if($existUser['role'] == 'moderator') {?> selected <?php } ?>> Moderateur </option>
 			       </select>
 			</div>
-	<?php } ?>
+	<?php } ?> <br/>
 
-		<input hidden name="id" value="<?= $user['id']?>" /> <br/>
 
 		<div>
 			<input class="btn btn-primary" type="submit" value="Modifier mon compte utilisateur" name="update" />
@@ -92,3 +92,5 @@
 <?php $content = ob_get_clean(); ?>
 
 <?php require('view/template.php');?>
+
+<?php require('view/verification/user.php'); ?>

@@ -22,6 +22,10 @@
 	<a href="index.php?action=listPosts"> Revenir aux chapitres </a>
 
 	<h1> Chapitre <?= $post['chapter'] ?> :   <?= $post['title'] ?> </h1>
+	<?php 
+   	if(!empty($_SESSION['role']) && $_SESSION['role'] == 'admin' || !empty($_SESSION['role']) && $_SESSION['role'] == 'author'){ ?> 
+		<a href="index.php?action=update_post&postId=<?= $post['id']?>"> Modification </a> <?php 
+	}?>
 
 	<p> <?= $post['content'] ?> </p>
 
@@ -31,7 +35,7 @@
 
 	<?php		
 
-		if(!empty($_SESSION['pseudo'])){ ?>
+		if(!empty($_SESSION['pseudo'])){ ?> <!-- Formulaire de Commentaire n'apparait que si un utilisateur est connecté-->
 			<form action="" method="post">
 				<div>
 					<label for="comment">Ajouter un Commentaire</label><br />
@@ -55,7 +59,7 @@
 				<p> <?= htmlspecialchars($comment['comment']) ?> </p>
 
 				<?php 
-					if(!empty($_SESSION['pseudo']) && $comment['user_id'] != $_SESSION['id']){?> 
+					if(!empty($_SESSION['pseudo']) && $comment['user_id'] != $_SESSION['id']){?>  <!--Formulaire de signalement -->
 						<p> 
 							<button type="button" data-toggle="modal" data-target="#signaler<?=$i?>" class="btn btn-primary">Signaler</button>
 							<div class="modal fade" id="signaler<?=$i?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -87,7 +91,8 @@
 				<?php } ?>
 
 				<p> <?php if (!empty($_SESSION['pseudo'])){
-							if( $comment['user_id'] == $_SESSION['id'] || $_SESSION['role']=='admin'){ ?>
+							if( $comment['user_id'] == $_SESSION['id'] || $_SESSION['role'] == 'admin' || $_SESSION['role'] =='moderator'){ ?> <!-- Formulaire de modification et de suppression -->
+							
 									<form style="display: inline;" method="POST" action="">
 										<button class="btn btn-danger" name="delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre commentaire ')"> Supprimé </button>
 										<input hidden name="commentId" value="<?= $comment['id']?>">
@@ -130,4 +135,7 @@
 <?php require('view/template.php');
 ?>
 
-<?php require('view/verification/comment.php');?>
+<?php 
+		require('view/verification/comment.php');
+		require('view/verification/moderation.php');
+?>

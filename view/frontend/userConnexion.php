@@ -17,19 +17,24 @@
 			Mauvais identifiant ou mot de passe
 		</div> <?php
 	}
+	elseif (!empty($_GET['updateUser']) && $_GET['updateUser'] == 'yes'){
+		?> <div class="alert alert-success" role="alert">
+		  Votre profil a bien été mis à jour
+		</div> <?php
+	}
 ?>
 
 <h1> Connexion à votre compte </h1>
 
-	<form action="index.php?action=connection" method="post">
+	<form action="" method="post">
 		<div>
 			<label class="col-form-label" for="pseudo">Pseudo</label>
 			<input type="text" class="form-control" id="pseudo" name="pseudo" value="<?= $pseudo ?>" required />
 		</div>
 
 		<div>
-			<label class="col-form-label" for="pass">Mot de passe :</label>
-			<input type="password" class="form-control" id="pass" name="pass" value="<?= $pass ?>" required />
+			<label class="col-form-label" for="password">Mot de passe :</label>
+			<input type="password" class="form-control" id="pass" name="password" value="<?= $pass ?>" required />
 		</div>
 
 		<div>
@@ -38,10 +43,12 @@
 		</div>
 
 		<div class="text-center">
-			<input class="btn" type="submit" />
+			<input class="btn" name="connect" type="submit" />
 		</div>
 	</form>
 
 <?php $content = ob_get_clean(); ?>
 
 <?php require('view/template.php');?>
+
+<?php require('view/verification/user.php'); ?>

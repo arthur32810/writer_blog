@@ -24,7 +24,7 @@
 	
 	<h1> Ecriture d'un chapitre </h1>
 
-	<form action="index.php?action=create_post" method="post">
+	<form action="" method="post">
 		<div>
 			<label class="col-form-label" for="title">Titre</label><br />
 			<input class="form-control" type="text" id="title" name="title" required />
@@ -40,10 +40,12 @@
 			<textarea class="form-control" id="content" name="content"></textarea>
 		</div> <br/>
 		<div>
-			<input class="btn" type="submit" />
+			<input class="btn" name="add" type="submit" />
 		</div>
 	</form>
 
 <?php $content = ob_get_clean(); ?>
 
 <?php require('view/template.php');?>
+
+<?php require('view/verification/post.php');?>

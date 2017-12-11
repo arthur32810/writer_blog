@@ -105,13 +105,18 @@ class PostEntity
     {
         require('model/PostEntityManager.php');
         require('model/CommentEntityManager.php');
+        require('model/ModerationEntityManager.php');
         
         $paging ='';
 
-        $postManager = new Arthur\WriterBlog\Model\PostEntityManager();
-        $commentManager = new  Arthur\WriterBlog\Model\CommentEntityManager();
+        $postId = htmlspecialchars($_GET['id']);
 
-        $post = $postManager->getPost(htmlspecialchars($_GET['id']),'');
+        $post = new PostEntity();
+        $post->setId($postId);
+
+        $postManager = new Arthur\WriterBlog\Model\PostEntityManager();
+
+        $post = $postManager->getPost($post);
 
         if(!empty($post))
         {
@@ -130,11 +135,38 @@ class PostEntity
                 $limit2 = 5;
             }
 
+            $commentManager = new Arthur\WriterBlog\Model\CommentEntityManager();
+
             $comments = $commentManager->getComments($_GET['id'], $limit1, $limit2);
             $nb_paging_comments = $commentManager->pagingComments($_GET['id']);
 
             require('view/frontend/postView.php');
         }  
+        else{header('Location: index.php?action=listPosts&existPost=no');}
+    }
+
+    public static function writePost()
+    {
+        require('model/PostEntityManager.php');
+        require('view/backend/writePost.php');
+    }
+
+    public static function updateWrite(){
+        require('model/PostEntityManager.php');
+         require('model/CommentEntityManager.php');
+
+        $postId = htmlspecialchars($_GET['postId']);
+
+        $post = new PostEntity();
+        $post->setId($postId);
+
+        $postManager = new Arthur\WriterBlog\Model\PostEntityManager();
+        $post = $postManager->getPost($post);
+
+        if(!empty($post))
+        {
+            require('view/backend/updatePost.php');
+        }
         else{header('Location: index.php?action=listPosts&existPost=no');}
     }
 }

@@ -34,11 +34,7 @@
 			}
 		}
 
-		elseif (!empty($_GET['updateUser']) && $_GET['updateUser'] == 'yes'){
-			?> <div class="alert alert-success" role="alert">
-			  Votre profil a bien été mis à jour
-			</div> <?php
-		}
+		
 		elseif (!empty($_GET['deleteUser']) && $_GET['deleteUser'] == 'yes'){
 			?> <div class="alert alert-success" role="alert">
 			 Votre profil a bien été supprimé
@@ -48,5 +44,16 @@
 		elseif (!empty($_GET['connected']) && $_GET['connected'] == 'no'){
 			?><div class="alert alert-danger" role="alert">
 				Vous n'avez pas le droit d'accéder à cette page
+			</div> <?php
+		}
+
+		elseif(!empty($_GET['connected']) && $_GET['connected'] == 'ok'){
+			?> <div class="alert alert-success" role="alert">
+			 	Vous êtes connecté
+			</div> <?php
+		}
+		elseif(!empty($_GET['deconnected']) && $_GET['deconnected'] == 'yes'){
+			?> <div class="alert alert-success" role="alert">
+			 	Vous êtes déconnecté
 			</div> <?php
 		}

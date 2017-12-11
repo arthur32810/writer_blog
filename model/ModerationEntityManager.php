@@ -3,7 +3,7 @@ namespace Arthur\WriterBlog\Model;
 
 require_once('model/Manager.php');
 
-class ModerationManager extends Manager
+class ModerationEntityManager extends Manager
 {
 	public function addModeration($moderation){
 		$db = Manager::dbConnect();
@@ -41,22 +41,22 @@ class ModerationManager extends Manager
 		return $moderations;
 	}
 
-	public function getModeration($id){
+	public function getModeration($moderation){
 		$db = Manager::dbConnect();
 
-		$moderation=$db->prepare('SELECT * FROM moderation WHERE id=?');
-		$moderation->execute(array($id));
+		$getModeration=$db->prepare('SELECT * FROM moderation WHERE id=?');
+		$getModeration->execute(array($moderation->getId()));
 
-		$moderation = $moderation->fetch();
+		$moderation = $getModeration->fetch();
 
 		return $moderation;
 	}
 
-	public function deleteModeration($id){
+	public function deleteModeration($moderation){
 		$db = Manager::dbConnect();
 
 		$deleteModeration = $db->prepare('DELETE FROM moderation WHERE id = ?');
-		$deleteModeration->execute(array($id));
+		$deleteModeration->execute(array($moderation->getId()));
 
 		return $deleteModeration;
 	}
