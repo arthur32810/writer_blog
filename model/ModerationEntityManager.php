@@ -52,6 +52,17 @@ class ModerationEntityManager extends Manager
 		return $moderation;
 	}
 
+	public function getModerationComment($moderation){
+		$db = Manager::dbConnect();
+
+		$getModeration=$db->prepare('SELECT * FROM moderation WHERE id=?');
+		$getModeration->execute(array($moderation->getId_comment()));
+
+		$moderation = $getModeration->fetch();
+
+		return $moderation;
+	}
+
 	public function deleteModeration($moderation){
 		$db = Manager::dbConnect();
 

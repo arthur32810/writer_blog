@@ -15,24 +15,29 @@ $script='<script language="javascript" type="text/javascript">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>' ?>
 
 <?php ob_start();
-	if (!empty($_GET['existModeration']) &&$_GET['existModeration'] == 'no'){ 
+	if (!empty($_GET['existModeration']) &&$_GET['existModeration'] == 'no'){ // Billet de moderation non existant
 		?><div class="alert alert-danger" role="alert">
 				Le billet de modération n'existe pas
 			</div> <?php
 	}
-	if (!empty($_GET['complete']) &&$_GET['complete'] == 'no'){ 
+	elseif (!empty($_GET['complete']) &&$_GET['complete'] == 'no'){ // Information non compléte
 		?><div class="alert alert-danger" role="alert">
 				Les informations ne sont pas compléte
 			</div> <?php
 	}
-	elseif(!empty($_GET['deleteModeration'])){
+	elseif (!empty($_GET['ignoreModeration']) &&$_GET['ignoreModeration'] == 'yes'){ // Billet de modificaton ignoré
+		?><div class="alert alert-success" role="alert">
+				Le signalement à été ignoré
+			</div> <?php
+	}
+	elseif(!empty($_GET['deleteModeration'])){ // Suppression de la modération
 		if($_GET['deleteModeration'] == 'no'){
 			?><div class="alert alert-danger" role="alert">
 				Le billet de modération n'a pas pu être supprimé
 			</div> <?php
 		}
 		elseif($_GET['deleteModeration'] == 'yes'){
-			if(!empty($_GET['updateComment']) &&$_GET['updateComment'] == 'yes'){
+			if(!empty($_GET['updateComment']) &&$_GET['updateComment'] == 'yes'){ 
 				?> <div class="alert alert-success" role="alert">
 				 Le billet de modération a bien été supprimé et le commentaire modifié
 				</div> <?php
@@ -74,9 +79,15 @@ $script='<script language="javascript" type="text/javascript">
 
 			<p> 
 				<form style="display: inline;" method="POST" action=""> <!--Formulaire de suppression -->
-					<button class="btn btn-danger" name="deleteModeration" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre commentaire ')"> Supprimé </button>
+					<button class="btn btn-danger" name="deleteModeration" onclick="return confirm('Êtes-vous sûr de vouloir supprimer le commentaire ')"> Supprimé </button>
 
 					<input hidden name="commentId" value=" <?= $comment['id'];?>"/>
+					<input hidden name="moderationId" value=" <?= $moderation['id'];?>"/>
+				</form>
+
+				<form style="display: inline;" method="POST" action=""> <!--Formulaire de suppression -->
+					<button class="btn" name="ignoreModeration" onclick="return confirm('Ignorer le commentaire ')"> Ignoré </button>
+
 					<input hidden name="moderationId" value=" <?= $moderation['id'];?>"/>
 				</form>
 
@@ -95,7 +106,6 @@ $script='<script language="javascript" type="text/javascript">
 						</div>
 					</form>
 				</div>
-
 				
 			</p>
 
